@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nakayoshi India Pvt. Ltd. — Automation &amp; Machine Building</title>
+<title>Projects — Nakayoshi India Pvt. Ltd.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+
   :root{
     --blue:#008DD2;
     --blue-dark:#0077AE;
@@ -296,6 +297,37 @@
     .status-bar .contact-line{display:none;}
     section{padding:64px 0;}
   }
+
+  /* ---------- projects page hero ---------- */
+  .page-hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#2A2444 0%, var(--navy) 55%, #382F58 100%);padding:64px 0 52px;}
+  .page-hero .hero-ring.r1{width:520px;height:520px;border:24px solid var(--blue);opacity:.10;top:-200px;right:-140px;}
+  .page-hero .hero-ring.r2{width:380px;height:380px;border:16px solid var(--red);opacity:.10;top:-70px;right:-20px;}
+  .page-hero .wrap{position:relative;z-index:1;}
+  .breadcrumb{font-family:var(--font-mono);font-size:11.5px;color:var(--on-dark-faint);letter-spacing:.06em;margin-bottom:18px;}
+  .breadcrumb a{color:#8FD2F2;}
+  .breadcrumb a:hover{color:#fff;}
+  .page-hero h1{font-size:38px;margin-bottom:14px;}
+  .page-hero p.lead{max-width:560px;margin:0;}
+
+  /* ---------- filter row ---------- */
+  .filter-band{border-bottom:1px solid var(--line);background:var(--navy-pale);padding:16px 0;position:sticky;top:84px;z-index:20;}
+  .filter-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .filter-chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.03em;color:var(--navy);border:1px solid rgba(48,41,75,.22);border-radius:20px;padding:8px 16px;background:#fff;cursor:pointer;transition:all .15s;}
+  .filter-chip:hover{border-color:var(--blue);color:var(--blue);}
+  .filter-chip.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+  .projects-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:72px 0;}
+  .projects-page-grid .project-card{display:flex;flex-direction:column;}
+
+  @media (max-width:980px){
+    .filter-band{position:static;}
+    .projects-page-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .page-hero h1{font-size:28px;}
+    .projects-page-grid{grid-template-columns:1fr;padding:48px 0;}
+  }
+</style>
 </style>
 </head>
 <body>
@@ -313,17 +345,17 @@
 
 <header>
   <nav class="wrap">
-    <a href="#top" class="logo" aria-label="Nakayoshi India Pvt. Ltd."></a>
+    <a href="Index.html#top" class="logo" aria-label="Nakayoshi India Pvt. Ltd."></a>
     <ul class="nav-links">
-      <li><a href="#solutions">Solutions</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#industries">Industries</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="Index.html#solutions">Solutions</a></li>
+      <li><a href="Index.html#process">Process</a></li>
+      <li><a href="Index.html#capabilities">Capabilities</a></li>
+      <li><a href="projects.html" style="color:var(--blue);">Projects</a></li>
+      <li><a href="Index.html#industries">Industries</a></li>
+      <li><a href="Index.html#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#contact" class="btn btn-primary btn-sm">Request Consultation</a>
+      <a href="Index.html#contact" class="btn btn-primary btn-sm">Request Consultation</a>
       <button class="burger" aria-label="Toggle menu" id="burgerBtn"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -331,68 +363,14 @@
 
 <main id="top">
 
-  <section class="hero">
+  <section class="page-hero">
     <span class="hero-ring r1"></span>
     <span class="hero-ring r2"></span>
     <div class="wrap">
-      <div class="hero-copy">
-        <div class="eyebrow">Custom Automation · Machine Building</div>
-        <h1>We design and build<br>the machines that <em>run your line</em>.</h1>
-        <p class="lead">Nakayoshi India Pvt. Ltd. engineers custom production machinery and automation systems — from first concept sketch through simulation, fabrication, controls, and a commissioned line on your factory floor.</p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">Start a Project</a>
-          <a href="#solutions" class="btn btn-ghost-light">View Capabilities</a>
-        </div>
-        <div class="readout-strip">
-          <div class="readout"><div class="num"><span>99.2</span>%</div><div class="label">Avg. Uptime</div></div>
-          <div class="readout"><div class="num">340+</div><div class="label">Machines Deployed</div></div>
-          <div class="readout"><div class="num">↓38%</div><div class="label">Cycle Time Cut</div></div>
-          <div class="readout"><div class="num">27</div><div class="label">Active Lines</div></div>
-        </div>
-      </div>+/
-
-      <div class="hero-art">
-        <div class="blueprint-frame">
-          <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
-          <span class="corner corner-bl"></span><span class="corner corner-br"></span>
-          <span class="frame-tag">FIG. 01 — 4-AXIS PICK-AND-PLACE CELL</span>
-          <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg">
-            <rect x="225" y="370" width="110" height="26" rx="6" fill="none" stroke="#C9CADC" stroke-width="2"/>
-            <rect x="266" y="250" width="28" height="122" rx="6" fill="none" stroke="#C9CADC" stroke-width="2"/>
-            <circle class="joint joint-1" cx="280" cy="252" r="15" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
-            <path class="seg-draw seg-1" d="M280,252 L370,182" stroke="#DCDDEE" stroke-width="20" stroke-linecap="round" fill="none"/>
-            <circle class="joint joint-2" cx="370" cy="182" r="12" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
-            <path class="seg-draw seg-2" d="M370,182 L445,214" stroke="#DCDDEE" stroke-width="16" stroke-linecap="round" fill="none"/>
-            <circle class="joint joint-3" cx="445" cy="214" r="9" fill="#E31A20"/>
-            <path class="seg-draw seg-3" d="M445,214 L472,196" stroke="#E31A20" stroke-width="7" stroke-linecap="round" fill="none"/>
-            <path class="seg-draw seg-3" d="M445,214 L472,232" stroke="#E31A20" stroke-width="7" stroke-linecap="round" fill="none"/>
-
-            <line x1="280" y1="252" x2="180" y2="220" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
-            <text x="40" y="216" font-family="IBM Plex Mono" font-size="11" fill="#C9CADC">AXIS 01 · BASE ROTATE</text>
-
-            <line x1="370" y1="182" x2="370" y2="120" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
-            <text x="300" y="108" font-family="IBM Plex Mono" font-size="11" fill="#C9CADC">AXIS 02 · 130° SWING</text>
-
-            <line x1="472" y1="214" x2="520" y2="250" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
-            <text x="478" y="270" font-family="IBM Plex Mono" font-size="11" fill="#FF8A8E">GRIPPER · 2-FINGER</text>
-
-            <rect x="30" y="404" width="500" height="20" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
-            <g stroke="#8B86A3" stroke-width="1.5" fill="none">
-              <circle cx="60" cy="424" r="5"/><circle cx="130" cy="424" r="5"/><circle cx="200" cy="424" r="5"/>
-              <circle cx="270" cy="424" r="5"/><circle cx="340" cy="424" r="5"/><circle cx="410" cy="424" r="5"/><circle cx="480" cy="424" r="5"/>
-            </g>
-            <rect class="part part-1" x="50" y="392" width="22" height="16" rx="3" fill="#008DD2"/>
-            <rect class="part part-2" x="50" y="392" width="22" height="16" rx="3" fill="#E31A20"/>
-            <rect class="part part-3" x="50" y="392" width="22" height="16" rx="3" fill="#FFFFFF"/>
-          </svg>
-          <div class="spec-box">
-            <div><span>PAYLOAD</span><span>12 kg</span></div>
-            <div><span>REACH</span><span>1,400 mm</span></div>
-            <div><span>REPEATABILITY</span><span>±0.02 mm</span></div>
-            <div><span>CYCLES/MIN</span><span>38</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="breadcrumb"><a href="Index.html">Home</a> &nbsp;/&nbsp; Projects</div>
+      <div class="eyebrow">Selected Work</div>
+      <h1>Every machine we've built,<br>proven on a real floor.</h1>
+      <p class="lead">A fuller look at the automation systems, robotic cells, and controls upgrades our engineering team has designed, fabricated, and commissioned across manufacturing lines in India.</p>
     </div>
   </section>
 
@@ -407,137 +385,27 @@
     </div>
   </div>
 
-  <section id="solutions">
+  <div class="filter-band">
     <div class="wrap">
-      <div class="section-head">
-        <div class="section-eyebrow">What We Build</div>
-        <h2>Machines engineered around your line, not a catalog.</h2>
-        <p>Every system starts from your floor plan, your part, and your throughput target — then gets built, tested, and proven before it ever ships.</p>
-      </div>
-      <div class="solutions-grid">
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M6 20V10l6-6 6 6v10M9 20v-6h6v6"/></svg></div>
-          <h3>Custom Machine Design &amp; Build</h3>
-          <p>Bespoke production machines designed from spec, simulated digitally, then fabricated and commissioned on your floor.</p>
-          <div class="tag">Mechanical Engineering</div>
-        </div>
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></div>
-          <h3>Robotic Automation Systems</h3>
-          <p>Robotic arm integration for pick-and-place, welding, palletizing, and assembly work, tuned to your cycle time.</p>
-          <div class="tag">Robotics Integration</div>
-        </div>
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7"/></svg></div>
-          <h3>Controls &amp; PLC Programming</h3>
-          <p>PLC, HMI, and SCADA logic that ties sensors, drives, and safety systems into one coherent control architecture.</p>
-          <div class="tag">Controls Engineering</div>
-        </div>
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="9" width="20" height="6" rx="2"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div>
-          <h3>Conveyor &amp; Material Handling</h3>
-          <p>Conveyors, sortation, and accumulation systems engineered to keep product moving without bottlenecks.</p>
-          <div class="tag">Material Flow</div>
-        </div>
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <h3>Machine Vision &amp; Inspection</h3>
-          <p>Camera-based inspection systems that catch defects and verify assembly before product leaves the line.</p>
-          <div class="tag">Quality Systems</div>
-        </div>
-
-        <div class="sol-card">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/></svg></div>
-          <h3>Retrofit &amp; Modernization</h3>
-          <p>Upgrading aging equipment with modern controls and safety systems, without a full line replacement.</p>
-          <div class="tag">Lifecycle Extension</div>
-        </div>
-
+      <div class="filter-row">
+        <button class="filter-chip active" data-filter="all">All Projects</button>
+        <button class="filter-chip" data-filter="Automotive">Automotive</button>
+        <button class="filter-chip" data-filter="Food">Food &amp; Beverage</button>
+        <button class="filter-chip" data-filter="Pharmaceutical">Pharmaceutical</button>
+        <button class="filter-chip" data-filter="Packaging">Packaging</button>
+        <button class="filter-chip" data-filter="Consumer">Consumer Goods</button>
+        <button class="filter-chip" data-filter="Electronics">Electronics</button>
       </div>
     </div>
-  </section>
-
-  <section id="process">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-eyebrow">How a Build Runs</div>
-        <h2>Six stages, one engineering team, start to finish.</h2>
-        <p>The same crew that scopes the project is the one standing on your floor during commissioning.</p>
-      </div>
-      <div class="process-list">
-        <div class="process-step"><div class="step-num">01</div><h4>Concept &amp; Feasibility</h4><p>We study your part, your space, and your throughput target before drawing anything.</p></div>
-        <div class="process-step"><div class="step-num">02</div><h4>Design &amp; Simulation</h4><p>3D design and cycle-time simulation catch interference and bottlenecks before steel is cut.</p></div>
-        <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Frames, fixtures, and mechanisms are built and dry-fit in our shop, not on your floor.</p></div>
-        <div class="process-step"><div class="step-num">04</div><h4>Controls Integration</h4><p>PLC, HMI, sensors, and safety circuits are wired, programmed, and bench-tested as one system.</p></div>
-        <div class="process-step"><div class="step-num">05</div><h4>Testing &amp; Commissioning</h4><p>Full run-off at rate, then on-site install, alignment, and operator handover.</p></div>
-        <div class="process-step"><div class="step-num">06</div><h4>Support &amp; Maintenance</h4><p>Spares, remote diagnostics, and scheduled service keep the line running for years.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="capabilities" class="stats-section">
-    <div class="wrap">
-      <div class="section-head center" style="margin-bottom:40px;">
-        <div class="section-eyebrow">Our Footprint</div>
-        <h2>Built by engineers, proven on real lines.</h2>
-      </div>
-      <div class="stats-strip">
-        <div class="stat"><div class="n">2014</div><div class="l">Founded</div></div>
-        <div class="stat"><div class="n accent">340+</div><div class="l">Machines Built</div></div>
-        <div class="stat"><div class="n">12</div><div class="l">Industries Served</div></div>
-        <div class="stat"><div class="n">86</div><div class="l">Engineers on Staff</div></div>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <section>
     <div class="wrap">
-      <div class="section-head">
-        <div class="section-eyebrow">Why Manufacturers Choose Us</div>
-        <h2>Engineering-led, floor-tested, supported after handover.</h2>
-      </div>
-      <div class="adv-grid">
-        <div class="adv-card"><h4>Engineering-Led</h4><p>Every project is scoped and run by mechanical and controls engineers, not a sales team handing off a quote.</p></div>
-        <div class="adv-card"><h4>Built for Your Line</h4><p>Machines are designed around your existing footprint and part flow, not pulled from a catalog template.</p></div>
-        <div class="adv-card"><h4>Tested Before It Ships</h4><p>Full simulation and run-off testing happens in our shop, long before a machine reaches your floor.</p></div>
-        <div class="adv-card"><h4>Supported After Commissioning</h4><p>Spare parts, remote diagnostics, and scheduled maintenance keep machines running for years, not months.</p></div>
-      </div>
-    </div>
-  </section>
+      <div class="projects-page-grid" id="projectsGrid">
 
-  <section id="industries">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-eyebrow">Where We Work</div>
-        <h2>Industries we build for.</h2>
-      </div>
-      <div class="industry-row">
-        <div class="industry-chip">AUTOMOTIVE</div>
-        <div class="industry-chip">FOOD &amp; BEVERAGE</div>
-        <div class="industry-chip">PHARMACEUTICAL</div>
-        <div class="industry-chip">PACKAGING</div>
-        <div class="industry-chip">CONSUMER GOODS</div>
-        <div class="industry-chip">ELECTRONICS</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-eyebrow">Selected Work</div>
-        <h2>Projects built and commissioned.</h2>
-        <p>A sample of machines and systems designed, fabricated, and installed by our engineering team across manufacturing lines in India.</p>
-      </div>
-      <div class="projects-grid">
-
-        <div class="project-card">
+        <div class="project-card" data-cat="Automotive">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 12 — PALLETIZING CELL</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -561,8 +429,9 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-cat="Food">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 08 — FILL &amp; SEAL LINE</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -588,8 +457,9 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-cat="Pharmaceutical">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 15 — VISION INSPECTION</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -613,8 +483,9 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-cat="Packaging">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 21 — CASE PACKER</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -637,8 +508,9 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-cat="Consumer">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 27 — ASSEMBLY FIXTURE</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -662,8 +534,9 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-cat="Electronics">
           <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
             <span class="fig-tag">FIG. 33 — RETROFIT LINE</span>
             <span class="fig-status">● LIVE</span>
             <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
@@ -688,77 +561,184 @@
           </div>
         </div>
 
-      </div>
-      <div class="view-more-row">
-        <a href="projects.html" class="btn btn-ghost">View More Projects</a>
+        <div class="project-card" data-cat="Automotive">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 41 — WELD CELL</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="30" y="90" width="340" height="16" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="150" y="40" width="20" height="50" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <circle cx="160" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M160,42 L230,60" stroke="#DCDDEE" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="230" cy="60" r="5" fill="#E31A20"/>
+              <path d="M230,55 L240,45 M230,60 L244,58 M230,65 L240,75" stroke="#E31A20" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Aurangabad</div>
+            <h3>Robotic Spot Welding Cell</h3>
+            <p>Dual-arm spot welding station for chassis sub-frames, with automated fixture changeover between two body variants.</p>
+            <div class="project-meta">
+              <div><div class="m-val">54</div><div class="m-lbl">Welds / Cycle</div></div>
+              <div><div class="m-val">2 min</div><div class="m-lbl">Changeover</div></div>
+              <div><div class="m-val">99.1%</div><div class="m-lbl">First-Pass Yield</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="Food">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 46 — CARTONING LINE</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="60" width="50" height="40" rx="3" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="130" y="55" width="50" height="45" rx="3" fill="none" stroke="#5FC4F0" stroke-width="2" stroke-dasharray="3,4"/>
+              <rect x="220" y="50" width="50" height="50" rx="3" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="310" y="45" width="50" height="55" rx="3" fill="none" stroke="#E31A20" stroke-width="2"/>
+              <path d="M90,80 L130,78" stroke="#8B86A3" stroke-width="2"/>
+              <path d="M180,78 L220,75" stroke="#8B86A3" stroke-width="2"/>
+              <path d="M270,75 L310,72" stroke="#8B86A3" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Food &amp; Beverage · Indore</div>
+            <h3>Automated Cartoning &amp; Labeling</h3>
+            <p>Continuous-motion cartoner with print-and-apply labeling, integrated with an upstream filling line for full-speed handoff.</p>
+            <div class="project-meta">
+              <div><div class="m-val">90</div><div class="m-lbl">Cartons / Min</div></div>
+              <div><div class="m-val">±1mm</div><div class="m-lbl">Label Placement</div></div>
+              <div><div class="m-val">7 wks</div><div class="m-lbl">Install to Run</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="Pharmaceutical">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 52 — SERIALIZATION CELL</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="65" width="360" height="16" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="170" y="25" width="60" height="35" rx="4" fill="none" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M180,35 h40 M180,45 h40 M180,55 h24" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M200,60 L200,65" stroke="#8B86A3" stroke-width="2"/>
+              <circle cx="60" cy="73" r="4" fill="none" stroke="#8B86A3" stroke-width="1.5"/>
+              <circle cx="340" cy="73" r="4" fill="none" stroke="#8B86A3" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Pharmaceutical · Sikkim</div>
+            <h3>Track &amp; Trace Serialization Cell</h3>
+            <p>Print, vision-verify, and aggregate serialization system meeting export compliance requirements at full line speed.</p>
+            <div class="project-meta">
+              <div><div class="m-val">100%</div><div class="m-lbl">Code Verification</div></div>
+              <div><div class="m-val">150</div><div class="m-lbl">Units / Min</div></div>
+              <div><div class="m-val">6 wks</div><div class="m-lbl">Commissioning</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="Packaging">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 58 — PALLET WRAPPER</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="150" y="40" width="100" height="70" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <ellipse cx="200" cy="110" rx="70" ry="12" fill="none" stroke="#5FC4F0" stroke-width="2" stroke-dasharray="4,5"/>
+              <circle cx="130" cy="110" r="6" fill="#E31A20"/>
+              <circle cx="270" cy="110" r="6" fill="#E31A20"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Packaging · Baroda</div>
+            <h3>Automatic Pallet Wrapping System</h3>
+            <p>Rotary-arm stretch wrapper with load-height sensing, tied into the palletizer's cycle to eliminate a manual handoff.</p>
+            <div class="project-meta">
+              <div><div class="m-val">40s</div><div class="m-lbl">Wrap Cycle</div></div>
+              <div><div class="m-val">↓35%</div><div class="m-lbl">Film Usage</div></div>
+              <div><div class="m-val">3 wks</div><div class="m-lbl">Install to Run</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="Electronics">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 63 — SMT HANDLING</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="55" width="120" height="12" rx="3" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="260" y="55" width="120" height="12" rx="3" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="150" y="30" width="100" height="60" rx="6" fill="none" stroke="#5FC4F0" stroke-width="2" stroke-dasharray="3,4"/>
+              <circle cx="200" cy="60" r="10" fill="none" stroke="#E31A20" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Electronics · Bengaluru</div>
+            <h3>SMT Board Handling &amp; Buffer</h3>
+            <p>Board-handling and buffering cell linking two SMT lines, smoothing throughput mismatches without added floor space.</p>
+            <div class="project-meta">
+              <div><div class="m-val">200</div><div class="m-lbl">Boards / Hr</div></div>
+              <div><div class="m-val">0</div><div class="m-lbl">Board Damage</div></div>
+              <div><div class="m-val">4 wks</div><div class="m-lbl">Build to Line</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="Consumer">
+          <div class="project-media">
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span><span class="corner corner-bl"></span><span class="corner corner-br"></span>
+            <span class="fig-tag">FIG. 69 — LEAK TEST STATION</span>
+            <span class="fig-status">● LIVE</span>
+            <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">
+              <rect x="160" y="35" width="80" height="70" rx="6" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <circle cx="200" cy="70" r="20" fill="none" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M200,50 L200,70 L214,80" stroke="#5FC4F0" stroke-width="2"/>
+              <circle cx="200" cy="70" r="3" fill="#E31A20"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Consumer Goods · Faridabad</div>
+            <h3>Automated Leak Test Station</h3>
+            <p>Pressure-decay leak testing station for molded housings, with automated load/unload and reject sorting.</p>
+            <div class="project-meta">
+              <div><div class="m-val">12s</div><div class="m-lbl">Test Cycle</div></div>
+              <div><div class="m-val">0.5cc</div><div class="m-lbl">Leak Sensitivity</div></div>
+              <div><div class="m-val">5 wks</div><div class="m-lbl">Commissioning</div></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section>
+  <section class="stats-section">
     <div class="wrap">
-      <div class="section-head center">
-        <div class="section-eyebrow">From the Floor</div>
-        <h2>What plant teams say after commissioning.</h2>
+      <div class="section-head center" style="margin-bottom:40px;">
+        <div class="section-eyebrow">Track Record</div>
+        <h2>The numbers behind these builds.</h2>
       </div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <p class="quote">Nakayoshi rebuilt our palletizing cell over a single weekend changeover. Three years on, it still hasn't gone down on a shift.</p>
-          <div class="who">R. Tanaka<span>Plant Manager, Meridian Foods</span></div>
-        </div>
-        <div class="testi-card">
-          <p class="quote">They simulated the whole line before any steel was cut, which is the only reason commissioning took three days instead of three weeks.</p>
-          <div class="who">A. Deshmukh<span>Operations Director, Vantage Auto Components</span></div>
-        </div>
-        <div class="testi-card">
-          <p class="quote">Our old conveyor system was the bottleneck on every shift. The retrofit cut changeover time without touching the rest of the line.</p>
-          <div class="who">S. Kulkarni<span>Engineering Head, Northbridge Packaging</span></div>
-        </div>
+      <div class="stats-strip">
+        <div class="stat"><div class="n accent">340+</div><div class="l">Machines Built</div></div>
+        <div class="stat"><div class="n">12</div><div class="l">Industries Served</div></div>
+        <div class="stat"><div class="n">99.2%</div><div class="l">Avg. Uptime</div></div>
+        <div class="stat"><div class="n">27</div><div class="l">Active Lines</div></div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" style="padding-top:0;">
     <div class="wrap">
-      <div class="cta-section">
-        <div class="cta-left">
+      <div class="cta-section" style="grid-template-columns:1fr;text-align:center;padding:48px;">
+        <div class="cta-left" style="max-width:560px;margin:0 auto;">
           <div class="section-eyebrow">Get Started</div>
           <h2>Have a line that needs building?</h2>
-          <p>Tell us about your part, your space, and your timeline. An engineer reviews every inquiry directly — no sales handoff.</p>
-          <ul class="checklist">
-            <li>Free feasibility review on every inquiry</li>
-            <li>Direct line to the engineer who will run your project</li>
-            <li>Typical response within one business day</li>
-          </ul>
-        </div>
-        <div class="cta-right">
-          <form class="inquiry" id="inquiryForm">
-            <div class="field-row">
-              <div><label for="name">Contact Name</label><input id="name" required type="text" placeholder="Full name"></div>
-              <div><label for="company">Company</label><input id="company" required type="text" placeholder="Company name"></div>
-            </div>
-            <div class="field-row">
-              <div><label for="email">Email</label><input id="email" required type="email" placeholder="you@company.com"></div>
-              <div><label for="phone">Phone</label><input id="phone" type="tel" placeholder="+91"></div>
-            </div>
-            <div>
-              <label for="ptype">Project Type</label>
-              <select id="ptype">
-                <option>Custom Machine Build</option>
-                <option>Robotic Automation</option>
-                <option>Controls &amp; PLC</option>
-                <option>Conveyor Systems</option>
-                <option>Retrofit / Modernization</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label for="details">Project Details</label>
-              <textarea id="details" placeholder="Part, throughput target, current setup..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="margin-top:6px;">Send Inquiry</button>
-            <div class="confirm-msg" id="confirmMsg">REQUEST RECEIVED — Our engineering team will respond within 1 business day.</div>
-          </form>
+          <p>Tell us about your part, your space, and your timeline. An engineer reviews every inquiry directly.</p>
+          <a href="Index.html#contact" class="btn btn-primary" style="margin-top:6px;">Start a Project</a>
         </div>
       </div>
     </div>
@@ -776,20 +756,20 @@
       <div>
         <h5>Solutions</h5>
         <ul>
-          <li><a href="#solutions">Custom Machine Build</a></li>
-          <li><a href="#solutions">Robotic Automation</a></li>
-          <li><a href="#solutions">Controls &amp; PLC</a></li>
-          <li><a href="#solutions">Conveyor Systems</a></li>
+          <li><a href="Index.html#solutions">Custom Machine Build</a></li>
+          <li><a href="Index.html#solutions">Robotic Automation</a></li>
+          <li><a href="Index.html#solutions">Controls &amp; PLC</a></li>
+          <li><a href="Index.html#solutions">Conveyor Systems</a></li>
         </ul>
       </div>
       <div>
         <h5>Company</h5>
         <ul>
-          <li><a href="#capabilities">Capabilities</a></li>
-          <li><a href="#process">Our Process</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#industries">Industries</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="Index.html#capabilities">Capabilities</a></li>
+          <li><a href="Index.html#process">Our Process</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="Index.html#industries">Industries</a></li>
+          <li><a href="Index.html#contact">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -816,9 +796,18 @@
       document.querySelector('.nav-links').classList.contains('open') ? 'flex' : 'none';
   });
 
-  document.getElementById('inquiryForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    document.getElementById('confirmMsg').classList.add('show');
+  var chips = document.querySelectorAll('.filter-chip');
+  var cards = document.querySelectorAll('#projectsGrid .project-card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var filter = chip.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var match = filter === 'all' || card.getAttribute('data-cat') === filter;
+        card.style.display = match ? '' : 'none';
+      });
+    });
   });
 </script>
 
