@@ -212,12 +212,8 @@
     height:375px;
     border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;transition:border-color .15s, transform .15s, box-shadow .15s;}
   .project-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(48,41,75,.35);}
-  .project-media{position:relative;height:195px;background:linear-gradient(150deg,#2A2444 0%, var(--navy) 55%, #382F58 100%);overflow:hidden;}
-  .project-media::before{
-    content:"";position:absolute;inset:0;
-    background-image:linear-gradient(var(--line-dark) 1px, transparent 1px),linear-gradient(90deg, var(--line-dark) 1px, transparent 1px);
-    background-size:22px 22px;opacity:.5;
-  }
+  .project-media{position:relative;height:195px;background:#706363;overflow:hidden;}
+
   .project-media .fig-tag{position:absolute;top:12px;left:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--on-dark-faint);z-index:1;}
   .project-media .fig-status{position:absolute;top:12px;right:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:#5FC4F0;z-index:1;}
   .project-media svg{position:relative;z-index:1;width:100%;height:100%;}
@@ -304,21 +300,15 @@
 </head>
 <body>
 
-<div class="status-bar">
-  <div class="wrap">
-    <div class="status-led"><span class="led-dot"></span> SYSTEM STATUS: ALL LINES NOMINAL</div>
-    <div class="contact-line">
-      <span>+91 98220 47711</span>
-      <span>engineering@nakayoshi.tech</span>
-      <span>Pune, Maharashtra, India</span>
-    </div>
-  </div>
-</div>
+
 
 <header>
   <nav class="wrap">
-    <a href="#top" class="logo" aria-label="Nakayoshi India Pvt. Ltd."></a>
+    <a href="index.html" class="logo" aria-label="Nakayoshi India Pvt. Ltd.">
+      <img src="Assets/Logo.jpeg" alt="Nakayoshi India Pvt. Ltd. Logo" style="height: 58px; width: auto;">
+    </a>
     <ul class="nav-links">
+
       <li><a href="#solutions">Solutions</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#capabilities">Capabilities</a></li>
@@ -594,13 +584,7 @@
           <div class="project-media">
            
            <img src="Assets/machines/OilandTAplate.jpeg" alt="">
-              <rect x="60" y="100" width="90" height="18" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
-              <rect x="96" y="40" width="18" height="64" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
-              <circle cx="105" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
-              <path d="M105,42 L180,20" stroke="#DCDDEE" stroke-width="10" stroke-linecap="round"/>
-              <circle cx="180" cy="20" r="6" fill="#E31A20"/>
-              <rect x="250" y="70" width="110" height="46" rx="4" fill="none" stroke="#5FC4F0" stroke-width="1.5" stroke-dasharray="3,4"/>
-            </svg>
+             
           </div>
           <div class="project-body">
             <div class="project-industry">Automotive · Chennai</div>
@@ -639,13 +623,7 @@
           <div class="project-media">
            
            <img src="Assets/machines/Servopress.jpeg" alt="" style="object-fit: contain;">
-              <rect x="60" y="100" width="90" height="18" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
-              <rect x="96" y="40" width="18" height="64" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
-              <circle cx="105" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
-              <path d="M105,42 L180,20" stroke="#DCDDEE" stroke-width="10" stroke-linecap="round"/>
-              <circle cx="180" cy="20" r="6" fill="#E31A20"/>
-              <rect x="250" y="70" width="110" height="46" rx="4" fill="none" stroke="#5FC4F0" stroke-width="1.5" stroke-dasharray="3,4"/>
-            </svg>
+              
           </div>
           <div class="project-body">
             <div class="project-industry">Automotive · Gurugram</div>
