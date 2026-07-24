@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nakayoshi India Pvt. Ltd. — Automation &amp; Machine Building</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#008DD2;
+    --blue-dark:#0077AE;
+    --blue-tint:rgba(0,141,210,.12);
+    --navy:#30294B;
+    --navy-light:#473F6E;
+    --navy-pale:#EEF0F7;
+    --red:#E31A20;
+    --red-tint:rgba(227,26,32,.10);
+    --white:#FFFFFF;
+    --black:#0A0A0A;
+    --text-body:#27243A;
+    --text-mid:#6B647F;
+    --on-dark-mid:rgba(255,255,255,.68);
+    --on-dark-faint:rgba(255,255,255,.45);
+    --line:rgba(48,41,75,.14);
+    --line-dark:rgba(255,255,255,.18);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--text-body);
+    font-family:var(--font-body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font-family:inherit;}
+
+  /* faint blueprint grid on light sections */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:42px 42px;
+    opacity:.5;
+    mask-image:linear-gradient(to bottom, black 0%, black 14%, transparent 38%);
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1;}
+
+  :focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+
+  /* ---------- utility bar ---------- */
+  .status-bar{background:var(--navy);font-family:var(--font-mono);font-size:12px;color:var(--on-dark-mid);}
+  .status-bar .wrap{display:flex;align-items:center;justify-content:space-between;height:38px;gap:18px;flex-wrap:wrap;}
+  .status-led{display:flex;align-items:center;gap:8px;color:#fff;}
+  .led-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(0,141,210,.28);animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.45;}}
+  .status-bar .contact-line{display:flex;gap:22px;flex-wrap:wrap;}
+  .status-bar .contact-line span{white-space:nowrap;}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:84px;}
+  .logo-link{display:flex;align-items:center;height:100%;}
+  .logo-link img{height:58px;width:auto;}
+
+  .nav-links{display:flex;align-items:center;gap:34px;font-size:14.5px;color:var(--navy);font-weight:500;}
+  .nav-links a{transition:color .15s;}
+  .nav-links a:hover{color:var(--blue);}
+
+  .nav-actions{display:flex;align-items:center;gap:16px;}
+  .burger{display:none;background:none;border:1px solid var(--line);border-radius:6px;width:42px;height:38px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+  .burger span{width:18px;height:1.5px;background:var(--navy);}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:7px;font-size:14px;font-weight:600;border:1.5px solid transparent;cursor:pointer;transition:all .15s;font-family:var(--font-body);}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-primary:hover{background:var(--blue-dark);}
+  .btn-ghost{background:transparent;border-color:var(--navy);color:var(--navy);}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+  .btn-ghost-light{background:transparent;border-color:var(--line-dark);color:#fff;}
+  .btn-ghost-light:hover{border-color:#fff;}
+  .btn-sm{padding:9px 16px;font-size:13px;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#2A2444 0%, var(--navy) 55%, #382F58 100%);padding:74px 0 70px;}
+  .hero-ring{position:absolute;border-radius:50%;pointer-events:none;}
+  .hero-ring.r1{width:620px;height:620px;border:26px solid var(--blue);opacity:.10;top:-220px;right:-160px;}
+  .hero-ring.r2{width:460px;height:460px;border:18px solid var(--red);opacity:.10;top:-90px;right:-40px;}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#8FD2F2;margin-bottom:18px;}
+  .eyebrow::before{content:"//";color:var(--on-dark-faint);}
+  h1{font-family:var(--font-display);font-weight:700;font-size:50px;line-height:1.06;letter-spacing:-.01em;margin:0 0 22px;color:#fff;}
+  h1 em{color:var(--red);font-style:normal;}
+  .hero p.lead{font-size:17px;color:var(--on-dark-mid);max-width:480px;margin:0 0 32px;}
+  .hero-ctas{display:flex;gap:14px;margin-bottom:46px;flex-wrap:wrap;}
+
+  .readout-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-dark);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.05);}
+  .readout{padding:16px 18px;border-right:1px solid var(--line-dark);}
+  .readout:last-child{border-right:none;}
+  .readout .num{font-family:var(--font-mono);font-size:21px;font-weight:600;color:#fff;}
+  .readout .num span{color:#5FC4F0;}
+  .readout .label{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--on-dark-faint);text-transform:uppercase;margin-top:4px;}
+
+  /* hero illustration */
+  .hero-art{position:relative;}
+  .blueprint-frame{position:relative;border:1px solid var(--line-dark);border-radius:14px;background:rgba(255,255,255,.04);padding:18px;}
+  .blueprint-frame .frame-tag{position:absolute;top:14px;left:18px;font-family:var(--font-mono);font-size:10.5px;color:var(--on-dark-faint);letter-spacing:.08em;}
+  .blueprint-frame svg{width:100%;height:auto;display:block;}
+
+  .spec-box{position:absolute;bottom:18px;right:18px;background:rgba(20,16,38,.78);border:1px solid var(--line-dark);border-radius:8px;padding:12px 14px;font-family:var(--font-mono);font-size:11px;color:var(--on-dark-mid);min-width:172px;}
+  .spec-box div{display:flex;justify-content:space-between;padding:2px 0;}
+  .spec-box div span:last-child{color:#fff;}
+
+  .corner{position:absolute;width:16px;height:16px;border:2px solid var(--blue);opacity:.9;}
+  .corner-tl{top:-1px;left:-1px;border-right:none;border-bottom:none;border-radius:6px 0 0 0;}
+  .corner-tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-radius:0 6px 0 0;border-color:var(--red);}
+  .corner-bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-radius:0 0 0 6px;border-color:var(--red);}
+  .corner-br{bottom:-1px;right:-1px;border-left:none;border-top:none;border-radius:0 0 6px 0;}
+
+  .seg-draw{stroke-dasharray:240;stroke-dashoffset:240;animation:drawLine .9s ease-out forwards;}
+  .seg-1{animation-delay:.05s;}
+  .seg-2{animation-delay:.35s;}
+  .seg-3{animation-delay:.6s;}
+  @keyframes drawLine{to{stroke-dashoffset:0;}}
+  .joint{opacity:0;animation:fadeIn .4s ease-out forwards;}
+  .joint-1{animation-delay:.35s;}
+  .joint-2{animation-delay:.65s;}
+  .joint-3{animation-delay:.9s;}
+  @keyframes fadeIn{to{opacity:1;}}
+  .part{animation:moveAlong 4.2s linear infinite;}
+  .part-2{animation-delay:1.4s;}
+  .part-3{animation-delay:2.8s;}
+  @keyframes moveAlong{0%{transform:translateX(0);opacity:0;}6%{opacity:1;}92%{opacity:1;}100%{transform:translateX(430px);opacity:0;}}
+
+  @media (prefers-reduced-motion:reduce){
+    .seg-draw,.joint,.part,.led-dot{animation:none !important;opacity:1 !important;stroke-dashoffset:0 !important;}
+  }
+
+  /* ---------- capability ticker ---------- */
+  .ticker-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--navy-pale);padding:18px 0;}
+  .ticker-band .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+  .pill{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--navy);border:1px solid rgba(48,41,75,.22);border-radius:20px;padding:7px 16px;background:#fff;}
+  .pill::before{content:"● ";color:var(--blue);}
+
+  /* ---------- section shells ---------- */
+  section{padding:96px 0;position:relative;}
+  .section-head{max-width:620px;margin:0 0 52px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+  h2{font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.01em;margin:0 0 14px;color:var(--navy);}
+  .section-head p{color:var(--text-mid);font-size:15.5px;margin:0;}
+
+  /* ---------- solutions grid ---------- */
+  .solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .sol-card{position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;padding:28px 24px;transition:border-color .15s, transform .15s, box-shadow .15s;}
+  .sol-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(48,41,75,.35);}
+  .sol-card .icon{width:42px;height:42px;border-radius:8px;background:var(--blue-tint);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .sol-card .icon svg{width:22px;height:22px;stroke:var(--blue);}
+  .sol-card h3{font-family:var(--font-display);font-size:17.5px;margin:0 0 10px;font-weight:600;color:var(--navy);}
+  .sol-card p{font-size:14px;color:var(--text-mid);margin:0 0 14px;}
+  .sol-card .tag{font-family:var(--font-mono);font-size:10.5px;color:var(--red);letter-spacing:.06em;text-transform:uppercase;}
+
+  /* ---------- process timeline ---------- */
+  .process-list{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid var(--line);}
+  .process-step{padding:26px 18px 0;border-right:1px solid var(--line);position:relative;}
+  .process-step:last-child{border-right:none;}
+  .process-step .step-num{font-family:var(--font-mono);font-size:13px;color:var(--red);margin-bottom:14px;font-weight:600;}
+  .process-step h4{font-family:var(--font-display);font-size:15.5px;margin:0 0 8px;font-weight:600;color:var(--navy);}
+  .process-step p{font-size:13.2px;color:var(--text-mid);margin:0;}
+  .process-step::before{content:"";position:absolute;top:0;left:0;width:34px;height:2px;background:var(--blue);}
+
+  /* ---------- capabilities stat strip ---------- */
+  .stats-section{background:var(--navy);}
+  .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-dark);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.04);}
+  .stat{padding:30px 24px;border-right:1px solid var(--line-dark);text-align:center;}
+  .stat:last-child{border-right:none;}
+  .stat .n{font-family:var(--font-mono);font-weight:600;font-size:32px;color:#fff;}
+  .stat .n.accent{color:#5FC4F0;}
+  .stat .l{font-size:12.5px;color:var(--on-dark-faint);margin-top:6px;text-transform:uppercase;letter-spacing:.06em;font-family:var(--font-mono);}
+  .stats-section .section-head h2{color:#fff;}
+  .stats-section .section-head p{color:var(--on-dark-mid);}
+
+  /* ---------- advantages ---------- */
+  .adv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .adv-card{border:1px solid var(--line);border-radius:10px;padding:24px 20px;background:#fff;}
+  .adv-card h4{font-family:var(--font-display);font-size:16px;margin:0 0 10px;font-weight:600;color:var(--blue);}
+  .adv-card p{font-size:13.6px;color:var(--text-mid);margin:0;}
+
+  /* ---------- industries ---------- */
+  .industry-row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  .industry-chip{border:1px solid rgba(48,41,75,.18);border-radius:8px;padding:20px 14px;text-align:center;font-family:var(--font-mono);font-size:12.5px;color:var(--navy);background:var(--navy-pale);font-weight:500;}
+
+  /* ---------- projects ---------- */
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .project-card{
+    height:375px;
+    border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden;transition:border-color .15s, transform .15s, box-shadow .15s;}
+  .project-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(48,41,75,.35);}
+  .project-media{position:relative;height:195px;background:#706363;overflow:hidden;}
+
+  .project-media .fig-tag{position:absolute;top:12px;left:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--on-dark-faint);z-index:1;}
+  .project-media .fig-status{position:absolute;top:12px;right:14px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:#5FC4F0;z-index:1;}
+  .project-media svg{position:relative;z-index:1;width:100%;height:100%;}
+  .project-body{padding:22px 22px 24px;}
+
+  img{width:100%;height:100%;object-fit:cover;display:block;}
+  .project-industry{font-family:var(--font-mono);font-size:10.5px;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:9px;}
+  .project-card h3{font-family:var(--font-display);font-size:17px;margin:0 0 10px;font-weight:600;color:var(--navy);}
+  .project-card p{font-size:13.6px;color:var(--text-mid);margin:0 0 16px;}
+  .project-meta{display:flex;gap:16px;border-top:1px solid var(--line);padding-top:14px;flex-wrap:wrap;}
+  .project-meta div{font-family:var(--font-mono);}
+  .project-meta .m-val{font-size:14.5px;font-weight:600;color:var(--blue);}
+  .project-meta .m-lbl{font-size:9.5px;color:var(--text-mid);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+
+  .view-more-row{display:flex;justify-content:center;margin-top:40px;}
+
+  /* ---------- testimonials ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .testi-card{border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:26px;background:#fff;}
+  .testi-card:nth-child(2){border-left-color:var(--red);}
+  .testi-card p.quote{font-size:14.5px;color:var(--text-body);margin:0 0 20px;}
+  .testi-card .who{font-family:var(--font-mono);font-size:12px;color:var(--navy);font-weight:600;}
+  .testi-card .who span{display:block;color:var(--text-mid);margin-top:2px;font-weight:400;}
+
+  /* ---------- CTA + contact ---------- */
+  .cta-section{position:relative;overflow:hidden;border:1.5px solid var(--navy);border-radius:16px;background:#fff;padding:54px;display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  .cta-section h2{font-size:30px;}
+  .cta-left p{color:var(--text-mid);font-size:15px;margin:0 0 26px;}
+  .checklist{display:flex;flex-direction:column;gap:10px;font-size:13.8px;color:var(--text-body);}
+  .checklist li{display:flex;gap:10px;align-items:flex-start;list-style:none;}
+  .checklist li::before{content:"";min-width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:6px;}
+
+  form.inquiry{display:flex;flex-direction:column;gap:12px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  label{font-family:var(--font-mono);font-size:11px;color:var(--text-mid);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:6px;}
+  input,select,textarea{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:11px 12px;color:var(--text-body);font-family:var(--font-body);font-size:13.8px;}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue);outline:none;}
+  textarea{resize:vertical;min-height:74px;}
+  .confirm-msg{display:none;border:1px solid var(--blue);background:var(--blue-tint);border-radius:8px;padding:14px 16px;font-family:var(--font-mono);font-size:12.5px;color:var(--blue-dark);margin-top:10px;}
+  .confirm-msg.show{display:block;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy);padding:64px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  .foot-logo-badge{display:inline-flex;background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:16px;}
+  .foot-logo-badge img{height:48px;width:auto;}
+  .foot-grid h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8FD2F2;margin:0 0 16px;}
+  .foot-grid li{margin-bottom:9px;font-size:13.8px;color:var(--on-dark-mid);}
+  .foot-grid li a:hover{color:#fff;}
+  .foot-about p{font-size:13.6px;color:var(--on-dark-mid);max-width:300px;margin:0;}
+  .foot-bottom{border-top:1px solid var(--line-dark);padding-top:22px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;color:var(--on-dark-faint);flex-wrap:wrap;gap:10px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-art{order:-1;}
+    .solutions-grid{grid-template-columns:repeat(2,1fr);}
+    .process-list{grid-template-columns:repeat(3,1fr);}
+    .process-step{border-bottom:1px solid var(--line);padding-bottom:22px;}
+    .stats-strip{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--line-dark);}
+    .adv-grid{grid-template-columns:repeat(2,1fr);}
+    .industry-row{grid-template-columns:repeat(3,1fr);}
+    .projects-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-grid{grid-template-columns:1fr;}
+    .cta-section{grid-template-columns:1fr;padding:36px;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+  @media (max-width:600px){
+    h1{font-size:36px;}
+    .readout-strip{grid-template-columns:repeat(2,1fr);}
+    .readout:nth-child(2){border-right:none;}
+    .solutions-grid{grid-template-columns:1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    .process-list{grid-template-columns:1fr 1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .status-bar .contact-line{display:none;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo" aria-label="Nakayoshi India Pvt. Ltd.">
+      <img src="Assets/Logo.jpeg" alt="Nakayoshi India Pvt. Ltd. Logo" style="height: 58px; width: auto;">
+    </a>
+    <ul class="nav-links">
+
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#contact" class="btn btn-primary btn-sm">Request Consultation</a>
+      <button class="burger" aria-label="Toggle menu" id="burgerBtn"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <span class="hero-ring r1"></span>
+    <span class="hero-ring r2"></span>
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Custom Automation · Machine Building</div>
+        <h1>We design and build<br>the machines that <em>run your line</em>.</h1>
+        <p class="lead">Nakayoshi India Pvt. Ltd. engineers custom production machinery and automation systems — from first concept sketch through simulation, fabrication, controls, and a commissioned line on your factory floor.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Start a Project</a>
+          <a href="#solutions" class="btn btn-ghost-light">View Capabilities</a>
+        </div>
+        <div class="readout-strip">
+          <div class="readout"><div class="num"><span>99.2</span>%</div><div class="label">Avg. Uptime</div></div>
+          <div class="readout"><div class="num">340+</div><div class="label">Machines Deployed</div></div>
+          <div class="readout"><div class="num">↓38%</div><div class="label">Cycle Time Cut</div></div>
+          <div class="readout"><div class="num">27</div><div class="label">Active Lines</div></div>
+        </div>
+      </div>+/
+
+      <div class="hero-art">
+        <div class="blueprint-frame">
+          <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+          <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          <span class="frame-tag">FIG. 01 — 4-AXIS PICK-AND-PLACE CELL</span>
+          <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg">
+            <rect x="225" y="370" width="110" height="26" rx="6" fill="none" stroke="#C9CADC" stroke-width="2"/>
+            <rect x="266" y="250" width="28" height="122" rx="6" fill="none" stroke="#C9CADC" stroke-width="2"/>
+            <circle class="joint joint-1" cx="280" cy="252" r="15" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+            <path class="seg-draw seg-1" d="M280,252 L370,182" stroke="#DCDDEE" stroke-width="20" stroke-linecap="round" fill="none"/>
+            <circle class="joint joint-2" cx="370" cy="182" r="12" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+            <path class="seg-draw seg-2" d="M370,182 L445,214" stroke="#DCDDEE" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <circle class="joint joint-3" cx="445" cy="214" r="9" fill="#E31A20"/>
+            <path class="seg-draw seg-3" d="M445,214 L472,196" stroke="#E31A20" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path class="seg-draw seg-3" d="M445,214 L472,232" stroke="#E31A20" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+            <line x1="280" y1="252" x2="180" y2="220" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
+            <text x="40" y="216" font-family="IBM Plex Mono" font-size="11" fill="#C9CADC">AXIS 01 · BASE ROTATE</text>
+
+            <line x1="370" y1="182" x2="370" y2="120" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
+            <text x="300" y="108" font-family="IBM Plex Mono" font-size="11" fill="#C9CADC">AXIS 02 · 130° SWING</text>
+
+            <line x1="472" y1="214" x2="520" y2="250" stroke="#6B647F" stroke-width="1" stroke-dasharray="2,4"/>
+            <text x="478" y="270" font-family="IBM Plex Mono" font-size="11" fill="#FF8A8E">GRIPPER · 2-FINGER</text>
+
+            <rect x="30" y="404" width="500" height="20" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+            <g stroke="#8B86A3" stroke-width="1.5" fill="none">
+              <circle cx="60" cy="424" r="5"/><circle cx="130" cy="424" r="5"/><circle cx="200" cy="424" r="5"/>
+              <circle cx="270" cy="424" r="5"/><circle cx="340" cy="424" r="5"/><circle cx="410" cy="424" r="5"/><circle cx="480" cy="424" r="5"/>
+            </g>
+            <rect class="part part-1" x="50" y="392" width="22" height="16" rx="3" fill="#008DD2"/>
+            <rect class="part part-2" x="50" y="392" width="22" height="16" rx="3" fill="#E31A20"/>
+            <rect class="part part-3" x="50" y="392" width="22" height="16" rx="3" fill="#FFFFFF"/>
+          </svg>
+          <div class="spec-box">
+            <div><span>PAYLOAD</span><span>12 kg</span></div>
+            <div><span>REACH</span><span>1,400 mm</span></div>
+            <div><span>REPEATABILITY</span><span>±0.02 mm</span></div>
+            <div><span>CYCLES/MIN</span><span>38</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-band">
+    <div class="wrap">
+      <span class="pill">ROBOTICS</span>
+      <span class="pill">PLC &amp; SCADA</span>
+      <span class="pill">CONVEYOR SYSTEMS</span>
+      <span class="pill">MACHINE VISION</span>
+      <span class="pill">CUSTOM FIXTURES</span>
+      <span class="pill">RETROFITS</span>
+    </div>
+  </div>
+
+  <section id="solutions">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">What We Build</div>
+        <h2>Machines engineered around your line, not a catalog.</h2>
+        <p>Every system starts from your floor plan, your part, and your throughput target — then gets built, tested, and proven before it ever ships.</p>
+      </div>
+      <div class="solutions-grid">
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M6 20V10l6-6 6 6v10M9 20v-6h6v6"/></svg></div>
+          <h3>Custom Machine Design &amp; Build</h3>
+          <p>Bespoke production machines designed from spec, simulated digitally, then fabricated and commissioned on your floor.</p>
+          <div class="tag">Mechanical Engineering</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></div>
+          <h3>Robotic Automation Systems</h3>
+          <p>Robotic arm integration for pick-and-place, welding, palletizing, and assembly work, tuned to your cycle time.</p>
+          <div class="tag">Robotics Integration</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7"/></svg></div>
+          <h3>Controls &amp; PLC Programming</h3>
+          <p>PLC, HMI, and SCADA logic that ties sensors, drives, and safety systems into one coherent control architecture.</p>
+          <div class="tag">Controls Engineering</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="9" width="20" height="6" rx="2"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div>
+          <h3>Conveyor &amp; Material Handling</h3>
+          <p>Conveyors, sortation, and accumulation systems engineered to keep product moving without bottlenecks.</p>
+          <div class="tag">Material Flow</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Machine Vision &amp; Inspection</h3>
+          <p>Camera-based inspection systems that catch defects and verify assembly before product leaves the line.</p>
+          <div class="tag">Quality Systems</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/></svg></div>
+          <h3>Retrofit &amp; Modernization</h3>
+          <p>Upgrading aging equipment with modern controls and safety systems, without a full line replacement.</p>
+          <div class="tag">Lifecycle Extension</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">How a Build Runs</div>
+        <h2>Six stages, one engineering team, start to finish.</h2>
+        <p>The same crew that scopes the project is the one standing on your floor during commissioning.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-step"><div class="step-num">01</div><h4>Concept &amp; Feasibility</h4><p>We study your part, your space, and your throughput target before drawing anything.</p></div>
+        <div class="process-step"><div class="step-num">02</div><h4>Design &amp; Simulation</h4><p>3D design and cycle-time simulation catch interference and bottlenecks before steel is cut.</p></div>
+        <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Frames, fixtures, and mechanisms are built and dry-fit in our shop, not on your floor.</p></div>
+        <div class="process-step"><div class="step-num">04</div><h4>Controls Integration</h4><p>PLC, HMI, sensors, and safety circuits are wired, programmed, and bench-tested as one system.</p></div>
+        <div class="process-step"><div class="step-num">05</div><h4>Testing &amp; Commissioning</h4><p>Full run-off at rate, then on-site install, alignment, and operator handover.</p></div>
+        <div class="process-step"><div class="step-num">06</div><h4>Support &amp; Maintenance</h4><p>Spares, remote diagnostics, and scheduled service keep the line running for years.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities" class="stats-section">
+    <div class="wrap">
+      <div class="section-head center" style="margin-bottom:40px;">
+        <div class="section-eyebrow">Our Footprint</div>
+        <h2>Built by engineers, proven on real lines.</h2>
+      </div>
+      <div class="stats-strip">
+        <div class="stat"><div class="n">2014</div><div class="l">Founded</div></div>
+        <div class="stat"><div class="n accent">340+</div><div class="l">Machines Built</div></div>
+        <div class="stat"><div class="n">12</div><div class="l">Industries Served</div></div>
+        <div class="stat"><div class="n">86</div><div class="l">Engineers on Staff</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Why Manufacturers Choose Us</div>
+        <h2>Engineering-led, floor-tested, supported after handover.</h2>
+      </div>
+      <div class="adv-grid">
+        <div class="adv-card"><h4>Engineering-Led</h4><p>Every project is scoped and run by mechanical and controls engineers, not a sales team handing off a quote.</p></div>
+        <div class="adv-card"><h4>Built for Your Line</h4><p>Machines are designed around your existing footprint and part flow, not pulled from a catalog template.</p></div>
+        <div class="adv-card"><h4>Tested Before It Ships</h4><p>Full simulation and run-off testing happens in our shop, long before a machine reaches your floor.</p></div>
+        <div class="adv-card"><h4>Supported After Commissioning</h4><p>Spare parts, remote diagnostics, and scheduled maintenance keep machines running for years, not months.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Where We Work</div>
+        <h2>Industries we build for.</h2>
+      </div>
+      <div class="industry-row">
+        <div class="industry-chip">AUTOMOTIVE</div>
+        <div class="industry-chip">FOOD &amp; BEVERAGE</div>
+        <div class="industry-chip">PHARMACEUTICAL</div>
+        <div class="industry-chip">PACKAGING</div>
+        <div class="industry-chip">CONSUMER GOODS</div>
+        <div class="industry-chip">ELECTRONICS</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Selected Work</div>
+        <h2>Projects built and commissioned.</h2>
+        <p>A sample of machines and systems designed, fabricated, and installed by our engineering team across manufacturing lines in India.</p>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/Valeo.jpeg" alt="">
+              <rect x="60" y="100" width="90" height="18" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="96" y="40" width="18" height="64" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <circle cx="105" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M105,42 L180,20" stroke="#DCDDEE" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="180" cy="20" r="6" fill="#E31A20"/>
+              <rect x="250" y="70" width="110" height="46" rx="4" fill="none" stroke="#5FC4F0" stroke-width="1.5" stroke-dasharray="3,4"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Chennai</div>
+            <h3>Fender Assembly Line</h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/Engine_assembly.jpeg" alt="">
+              <rect x="60" y="100" width="90" height="18" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="96" y="40" width="18" height="64" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <circle cx="105" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M105,42 L180,20" stroke="#DCDDEE" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="180" cy="20" r="6" fill="#E31A20"/>
+              <rect x="250" y="70" width="110" height="46" rx="4" fill="none" stroke="#5FC4F0" stroke-width="1.5" stroke-dasharray="3,4"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Gurugram</div>
+            <h3>Engine Assembly LTM</h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+
+
+  
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/OilandTAplate.jpeg" alt="">
+             
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Chennai</div>
+            <h3>Oil and TA Plate LTM</h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+        
+
+        
+
+
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/coolingelemnt.jpeg" alt="" style="object-fit: contain;">
+              >
+        
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Gurugram</div>
+            <h3>Cooling Element  LTM</h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+        
+
+        
+
+
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/Servopress.jpeg" alt="" style="object-fit: contain;">
+              
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Gurugram</div>
+            <h3>Servo Press Machine
+                
+            </h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+        
+
+        
+
+
+        <div class="project-card">
+          <div class="project-media">
+           
+           <img src="Assets/machines/ZipInspection.jpeg" alt="" style="object-fit: contain;">
+              <rect x="60" y="100" width="90" height="18" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <rect x="96" y="40" width="18" height="64" rx="4" fill="none" stroke="#C9CADC" stroke-width="2"/>
+              <circle cx="105" cy="42" r="9" fill="#2A2444" stroke="#5FC4F0" stroke-width="2"/>
+              <path d="M105,42 L180,20" stroke="#DCDDEE" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="180" cy="20" r="6" fill="#E31A20"/>
+              <rect x="250" y="70" width="110" height="46" rx="4" fill="none" stroke="#5FC4F0" stroke-width="1.5" stroke-dasharray="3,4"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-industry">Automotive · Gurugram</div>
+            <h3>Zip Inspection Machine</h3>
+            <p>Six-axis palletizing cell replacing a manual station, timed to a mixed-SKU line running three shifts.</p>
+           
+          </div>
+        </div>
+
+        
+
+        
+
+      </div>
+      <div class="view-more-row">
+        <a href="projects.html" class="btn btn-ghost">View More Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="section-eyebrow">From the Floor</div>
+        <h2>What plant teams say after commissioning.</h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="quote">Nakayoshi rebuilt our palletizing cell over a single weekend changeover. Three years on, it still hasn't gone down on a shift.</p>
+          <div class="who">R. Tanaka<span>Plant Manager, Meridian Foods</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">They simulated the whole line before any steel was cut, which is the only reason commissioning took three days instead of three weeks.</p>
+          <div class="who">A. Deshmukh<span>Operations Director, Vantage Auto Components</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">Our old conveyor system was the bottleneck on every shift. The retrofit cut changeover time without touching the rest of the line.</p>
+          <div class="who">S. Kulkarni<span>Engineering Head, Northbridge Packaging</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta-section">
+        <div class="cta-left">
+          <div class="section-eyebrow">Get Started</div>
+          <h2>Have a line that needs building?</h2>
+          <p>Tell us about your part, your space, and your timeline. An engineer reviews every inquiry directly — no sales handoff.</p>
+          <ul class="checklist">
+            <li>Free feasibility review on every inquiry</li>
+            <li>Direct line to the engineer who will run your project</li>
+            <li>Typical response within one business day</li>
+          </ul>
+        </div>
+        <div class="cta-right">
+          <form class="inquiry" id="inquiryForm">
+            <div class="field-row">
+              <div><label for="name">Contact Name</label><input id="name" required type="text" placeholder="Full name"></div>
+              <div><label for="company">Company</label><input id="company" required type="text" placeholder="Company name"></div>
+            </div>
+            <div class="field-row">
+              <div><label for="email">Email</label><input id="email" required type="email" placeholder="you@company.com"></div>
+              <div><label for="phone">Phone</label><input id="phone" type="tel" placeholder="+91"></div>
+            </div>
+            <div>
+              <label for="ptype">Project Type</label>
+              <select id="ptype">
+                <option>Custom Machine Build</option>
+                <option>Robotic Automation</option>
+                <option>Controls &amp; PLC</option>
+                <option>Conveyor Systems</option>
+                <option>Retrofit / Modernization</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="details">Project Details</label>
+              <textarea id="details" placeholder="Part, throughput target, current setup..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top:6px;">Send Inquiry</button>
+            <div class="confirm-msg" id="confirmMsg">REQUEST RECEIVED — Our engineering team will respond within 1 business day.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo-badge"><img src="Assets/logo.jpeg" alt="Nakayoshi India Pvt. Ltd."></div>
+        <p>Nakayoshi India Pvt. Ltd. designs and builds custom automation systems and production machinery for manufacturers across India — from concept through commissioning and long-term support.</p>
+      </div>
+      <div>
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#solutions">Custom Machine Build</a></li>
+          <li><a href="#solutions">Robotic Automation</a></li>
+          <li><a href="#solutions">Controls &amp; PLC</a></li>
+          <li><a href="#solutions">Conveyor Systems</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>Nakayoshi India Pvt. Ltd.</li>
+          <li>MIDC Industrial Area, Pune,<br>Maharashtra 411019, India</li>
+          <li>+91 98220 47711</li>
+          <li>engineering@nakayoshi.tech</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nakayoshi India Pvt. Ltd.</span>
+      <span>Join Hands For Innovative Solutions</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('burgerBtn').addEventListener('click', function(){
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.querySelector('.nav-links').style.display =
+      document.querySelector('.nav-links').classList.contains('open') ? 'flex' : 'none';
+  });
+
+  document.getElementById('inquiryForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('confirmMsg').classList.add('show');
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
