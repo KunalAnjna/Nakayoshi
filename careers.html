@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Careers - Cosmo Instruments India Pvt. Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+  :root{
+    --navy:#ffffff;
+    --navy-2:#f4f7fb;
+    --panel:#ffffff;
+    --accent:black;
+    --blue:#139dd8d4;
+    --blue-2:#139dd8d4;
+    --text:#182234;
+    --muted:#647085;
+    --line:rgba(33, 72, 146, 0.1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--navy);
+    color:var(--text);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+.navbar{
+    width: 100%;
+    min-height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    font-size:20px;
+}
+p{
+    text-align: justify;
+     
+}
+
+/* LOGO */
+.nav-logo{
+    width: 160px;
+    height: 55px;
+}
+
+.logo{
+    width: 100%;
+    height: 100%;
+    background-image: url(cosmologo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover{
+    transform: scale(1.05);
+}
+
+/* MENU */
+.menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+/* LINKS */
+.menu a{
+    text-decoration: none;
+    color: black;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* UNDERLINE */
+.menu a::after{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: rgb(129, 129, 218);
+    left: 0;
+    bottom: -4px;
+    transition: 0.3s;
+}
+
+.menu a:hover::after{
+    width: 100%;
+}
+
+.menu a:hover{
+    color: rgb(129, 129, 218);
+}
+
+/* DROPDOWN */
+.dropdown{
+    position: relative;
+}
+
+.dropdown-menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 220px;
+    background: white;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(5px);
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.dropdown-menu {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s;
+}
+
+.dropdown.active .dropdown-menu {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+.dropdown-menu p{
+    padding: 10px;
+}
+
+.dropdown-menu p:hover{
+    background: #f2f2f2;
+}
+
+/* BUTTON */
+button{
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 14px;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background: white;
+    color: #FF4742;
+    transform: translateY(2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+#button-tag{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#button-tag:hover{
+    color: #FF4742;
+}
+
+button:active{
+    transform: scale(0.95);
+}
+.menu a.active {
+    color: rgb(129, 129, 218);
+}
+
+.menu a.active::after {
+    width: 100%;
+}
+
+/* ========================= */
+/* 📱 MOBILE VIEW */
+/* ========================= */
+@media (min-width: 1000px) and (max-width: 1450px){
+
+    .navbar{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        flex-wrap: nowrap;
+    }
+
+    .nav-logo{
+        width: 130px;
+        height: 45px;
+        flex-shrink: 0;
+    }
+
+    .menu{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 25px;
+        flex-wrap: nowrap;
+        /* overflow-x: auto; -- yeh hatao, dropdown block ho raha tha */
+        overflow: visible;
+    }
+
+    .menu::-webkit-scrollbar{
+        display: none;
+    }
+
+    .menu a{
+        font-size: 20px;
+        white-space: nowrap;
+    }
+
+    button{
+        font-size: 12px;
+        padding: 6px 10px;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .dropdown{
+        position: relative;
+    }
+
+    .dropdown-menu{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 9999;
+    }
+}
+/* ========================= */
+/* 📱 MOBILE SAME LINE NAVBAR */
+/* ========================= */
+
+@media (max-width: 1000px){
+
+    
+    .navbar{ 
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 25px 0 10px;   /* right side extra gap */
+        overflow-x: auto;
+    }
+
+    /* scrollbar hide */
+    
+    .menu::-webkit-scrollbar{
+        display: none;
+    }
+
+    .nav-logo{
+        width: 120px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+
+    .menu{
+        width: 100%;
+        margin-bottom: 3px;
+        padding-right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 15px;
+        flex-shrink: 0;
+        
+    }
+
+    .menu a{ 
+        flex-shrink: 0;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .dropdown{
+display:flex;
+align-items:center;
+}
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static; /* important */
+        width: 100%;
+    }
+}
+
+.menu{
+padding:0 12px;
+}
+
+.menu{
+overflow-x:auto;
+padding-right:25px;
+}
+    button{
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
+
+    /* dropdown mobile simple 
+    .dropdown-menu{
+        position: absolute;
+        width: 200px;
+    }
+        */
+}
+/* ========================= */
+/* 📲 TABLET VIEW */
+/* ========================= */
+
+@media (max-width: 1023px){
+
+    .navbar{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 10px 25px;
+         overflow-x: auto;
+    }
+
+    .menu{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 10px;
+    }
+      .menu::-webkit-scrollbar{
+        display: none;
+    }
+      button{
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-left: 10px;
+        flex-shrink: 0;
+    }
+ .menu a{
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .nav-logo{
+        width: 130px;
+        height: 45px;
+    }
+}
+
+
+/* HERO */
+  .hero{
+    position:relative;
+    padding:110px 32px 90px;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(222,55,48,0.08), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(26,79,163,0.10), transparent 40%),
+      linear-gradient(180deg,#ffffff 0%, #f4f7fb 100%);
+    overflow:hidden;
+    text-align:center;
+  }
+  .hero .eyebrow{
+    display:inline-block; color:var(--accent); font-weight:700; font-size:.8rem;
+    letter-spacing:2.5px; text-transform:uppercase; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,5vw,3.6rem); font-weight:800; line-height:1.15;
+    max-width:820px; margin:0 auto 20px; color:var(--blue);
+  }
+  .hero h1 em{font-style:normal; color:black;}
+  .hero p{
+    max-width:680px; margin:0 auto 14px; color:var(--muted); font-size:1.05rem;
+  }
+  .hero .stat-line{
+    margin-top:36px; display:flex; justify-content:center; gap:48px; flex-wrap:wrap;
+  }
+  .hero .stat-line div{text-align:center;}
+  .hero .stat-line .num{font-family:'Poppins',sans-serif; font-size:2rem; font-weight:800; color:var(--blue);}
+  .hero .stat-line .lbl{font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;}
+
+  section{padding:80px 32px;}
+  .wrap{max-width:1180px; margin:0 auto;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 48px;}
+  .section-head .eyebrow{color:var(--accent); font-weight:700; font-size:.78rem; letter-spacing:2.5px; text-transform:uppercase;}
+  .section-head h2{font-size:clamp(1.7rem,3vw,2.4rem); font-weight:800; margin-top:10px;}
+  .section-head p{color:var(--muted); margin-top:12px;}
+
+  /* JOB GRID */
+  .job-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;
+  }
+  .job-card{
+    background:#ffffff;
+    border:1px solid var(--line); border-radius:14px; padding:26px;
+    cursor:pointer; transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    box-shadow:0 2px 14px rgba(24,34,52,0.05);
+  }
+  .job-card:hover{transform:translateY(-4px); border-color:#1677ff; box-shadow:0 12px 28px rgba(24,34,52,0.10);}
+  .job-card .tag{
+    display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:1px;
+    color:var(--accent); text-transform:uppercase; margin-bottom:12px;
+  }
+  .job-card h3{font-size:1.15rem; font-weight:700; margin-bottom:8px; color:var(--blue);}
+  .job-card .exp{color:var(--muted); font-size:.88rem; margin-bottom:16px;}
+  .job-card .toggle{
+    font-size:.85rem; font-weight:600; color:var(--blue-2); display:flex; align-items:center; gap:6px;
+  }
+  .job-card .details{
+    display:none; margin-top:16px; padding-top:16px; border-top:1px solid var(--line);
+  }
+  .job-card.open .details{display:block;}
+  .job-card.open .toggle .chev{transform:rotate(180deg);}
+  .job-card ul{list-style:none;}
+  .job-card ul li{
+    position:relative; padding-left:18px; margin-bottom:9px; color:var(--muted); font-size:.9rem;
+  }
+  .job-card ul li::before{
+    content:''; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:var(--accent);
+  }
+  .chev{transition:transform .25s ease; font-size:.8rem;}
+
+  /* INTERNSHIP */
+  .intern-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;}
+  .intern-card{
+    background:#ffffff; border:1px solid var(--line); border-radius:12px; padding:22px;
+    border-left:3px solid var(--blue); box-shadow:0 2px 14px rgba(24,34,52,0.05);
+  }
+  .intern-card p{font-size:.92rem; color:var(--text);}
+
+  /* CTA BAND */
+  .cta-band{
+    background:#1677ffa3;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .cta-band h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; margin-bottom:14px; color:#ffffff;}
+  .cta-band p{color:rgba(255,255,255,0.8); max-width:560px; margin:0 auto 30px;}
+  .btn-apply{
+    display:inline-block; background:var(--accent); color:#ffffff; font-weight:700;
+    padding:16px 42px; border-radius:8px; font-size:1rem; letter-spacing:.3px;
+    box-shadow:0 10px 30px rgba(222,55,48,0.35); transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-apply:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(222,55,48,0.45);}
+
+  /* WHY WORK */
+  .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;}
+  .why-card{text-align:center; padding:10px;}
+  .why-card .ico{
+    width:56px; height:56px; border-radius:14px; background:rgba(26,79,163,0.10);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 16px;
+    color:var(--blue); font-size:1.4rem; font-weight:800;
+  }
+  .why-card h4{font-size:1rem; margin-bottom:8px; color:var(--blue);}
+  .why-card p{font-size:.88rem; color:var(--muted);}
+
+/* FOOTER */
+
+/* ================= FOOTER ================= */
+.footer {
+    padding: 60px 40px;
+    color: #fff;
+
+    background: 
+        linear-gradient(rgba(11, 28, 52, 0.85), rgba(11, 28, 52, 0.85)),
+        url('footerimage.jpeg');
+
+    background-size: cover;
+    background-position: center;
+}
+
+/* CONTAINER */
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap; /* 🔥 important */
+}
+
+/* COLUMN */
+.footer-col {
+    flex: 1 1 220px; /* 🔥 responsive width */
+    min-width: 200px;
+}
+
+/* HEADINGS */
+.footer-col h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* underline */
+.footer-col h3::after {
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: #1e6fa3;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+/* LINKS */
+.footer-col a {
+    display: block;
+    color: #ccc;
+    margin: 8px 0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: #fff;
+    transform: translateX(5px); /* 🔥 small animation */
+}
+
+/* TEXT */
+.footer-col p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+    margin-top: 15px;
+}
+
+.social-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: #1e6fa3;
+    color: white;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 8px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    background: #0c4d75;
+    transform: translateY(-3px);
+}
+
+/* BOTTOM */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #aaa;
+
+}
+.footer-bottom p{
+text-align: center;
+}
+.footer-col p{
+    text-align: left;}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .footer {
+        padding: 50px 30px;
+    }
+
+    .footer-container {
+        gap: 25px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-col {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+    .footer {
+        padding: 40px 20px;
+    }
+
+    .footer-col h3 {
+        font-size: 18px;
+    }
+
+    .footer-col a,
+    .footer-col p {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+</style>
+</head>
+<body>
+
+ <header id="site-header" class="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-logo"><img src="Assets/Logo.jpeg" alt=""></div>
+     
+    </a>
+    <nav class="nav-desktop">
+      <a href="#solutions">Solutions</a>
+      <a href="#process">Process</a>
+      <a href="#projects">Projects</a>
+      <a href="#industries">Industries</a>
+      <a href="#contact">Contact</a>
+      <a href="careers.html">Careers</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#contact" class="btn btn-primary btn-shimmer">Request Consultation</a>
+    </div>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+    </button>
+  </div>
+  <nav id="nav-mobile" class="nav-mobile">
+    <a href="#solutions">Solutions</a>
+    <a href="#process">Process</a>
+    <a href="#projects">Projects</a>
+    <a href="#industries">Industries</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary btn-shimmer" style="text-align:center;margin-top:8px;">Request Consultation</a>
+  </nav>
+</header>
+
+
+<section class="hero" id="careers">
+  <span class="eyebrow">Careers at Cosmo</span>
+  <h1>Grow with <em>Cosmo Instruments</em> India Pvt. Ltd.</h1>
+  <p>Cosmo Instruments is a Japanese multinational company and a global leader in automobile leak testing solutions. With a legacy of 54 years in Japan and 17 years in India, Cosmo has set the benchmark for precision, reliability, and innovation.</p>
+  <p>Cosmo India proudly holds the No.1 market share in the country, serving over 1,000 direct customers with more than 10,000 leak testing units installed across the nation.</p>
+  <div class="stat-line">
+    <div><div class="num">54+</div><div class="lbl">Years in Japan</div></div>
+    <div><div class="num">17+</div><div class="lbl">Years in India</div></div>
+    <div><div class="num">1000+</div><div class="lbl">Direct Customers</div></div>
+    <div><div class="num">10,000+</div><div class="lbl">Units Installed</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Current Openings</span>
+      <h2>Open Positions</h2>
+      <p>Tap on a role to view responsibilities. Click "Apply Here" below to submit your application.</p>
+    </div>
+
+    <div class="job-grid" id="jobGrid">
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Service Engineer</h3>
+        <div class="exp">Fresher / 1-2 Years experience</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>On-site installation, commissioning and breakdown support for leak testing machines.</li>
+            <li>Attending customer service calls and preventive maintenance visits.</li>
+            <li>Calibration and repair of air leak testers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Assembly Engineer</h3>
+        <div class="exp">Fresher / 1-2 Years experience</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>Assembly of leak testing and special purpose machines.</li>
+            <li>Fixture assembly and prove-out.</li>
+            <li>Attending machine pre-dispatch inspection (PDI).</li>
+            <li>On-site installation and commissioning support.</li>
+            <li>Machine breakdown support.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Design Engineer</h3>
+        <div class="exp">Fresher / 1-2 Years experience</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>Leak testing machine and SPM concept preparation in 3D & CAD software.</li>
+            <li>2D drafting, BOM preparation, pneumatic and hydraulic circuits, flow chart preparation.</li>
+            <li>Preparation of DAP documents.</li>
+            <li>Discussion with sales team for project execution.</li>
+            <li>Attending project meetings with sales teams and customers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Account Executive</h3>
+        <div class="exp">5-8 Years experience (2-5 yrs listing also open)</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>GSTR1 & GSTR 3B filing and returns.</li>
+            <li>Issuing tax invoices.</li>
+            <li>Preparing purchase orders.</li>
+            <li>Purchase bill and stock entry.</li>
+            <li>Payroll knowledge.</li>
+            <li>Tally knowledge required.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Sales Executive</h3>
+        <div class="exp">Fresher / 2-3 Years experience</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>Sales of air leak and flow testers, along with other core products.</li>
+            <li>Sales of leak testing and special purpose machines (SPMs).</li>
+            <li>Sales of other automation solutions.</li>
+            <li>Trading of other standard products.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-card">
+        <span class="tag">Full-time</span>
+        <h3>Technical Sales Executive</h3>
+        <div class="exp">Fresher / 2-3 Years experience</div>
+        <div class="toggle">View details <span class="chev">▾</span></div>
+        <div class="details">
+          <ul>
+            <li>Study of machine RFQs and discussion with the sales team.</li>
+            <li>Interaction with sales teams.</li>
+            <li>Maintaining sales data records.</li>
+            <li>Customer visits with the sales team.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Internship Program</span>
+      <h2>Hands-on Training</h2>
+    </div>
+    <div class="intern-list">
+      <div class="intern-card"><p>Training on air leak tester and flow testers.</p></div>
+      <div class="intern-card"><p>Training on leak testing machines and other SPMs.</p></div>
+      <div class="intern-card"><p>Training on air leak tester calibration and repair.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Ready to build your career with Cosmo?</h2>
+    <p>Submit your application and our HR team will get in touch with the next steps.</p>
+    <a href="Apply.html" target="_blank" rel="noopener" class="btn-apply">Apply Here</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why Cosmo</span>
+      <h2>Why Choose Us?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="ico">54+</div>
+        <h4>Legacy & Expertise</h4>
+        <p>Decades of Japanese engineering heritage combined with 17+ years of Indian market leadership.</p>
+      </div>
+      <div class="why-card">
+        <div class="ico">#1</div>
+        <h4>Market Leadership</h4>
+        <p>India's No.1 market share in air leak testing, trusted by over 1,000 direct customers.</p>
+      </div>
+      <div class="why-card">
+        <div class="ico">🏭</div>
+        <h4>In-house Manufacturing</h4>
+        <p>Design, build and support end-to-end — from installation to calibration and after-sales service.</p>
+      </div>
+      <div class="why-card">
+        <div class="ico">🌍</div>
+        <h4>Pan-India Presence</h4>
+        <p>Facilities across Gurugram, Manesar, Bengaluru, Pune, Chennai and Gujarat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo-badge"><img src="Assets/logo.jpeg" alt="Nakayoshi India Pvt. Ltd."></div>
+        <p>Nakayoshi India Pvt. Ltd. designs and builds custom automation systems and production machinery for manufacturers across India — from concept through commissioning and long-term support.</p>
+      </div>
+      <div>
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#solutions">Custom Machine Build</a></li>
+          <li><a href="#solutions">Robotic Automation</a></li>
+          <li><a href="#solutions">Controls &amp; PLC</a></li>
+          <li><a href="#solutions">Conveyor Systems</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>Nakayoshi India Pvt. Ltd.</li>
+          <li>MIDC Industrial Area, Pune,<br>Maharashtra 411019, India</li>
+          <li>+91 98220 47711</li>
+          <li>engineering@nakayoshi.tech</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Nakayoshi India Pvt. Ltd.</span>
+      <span>Join Hands For Innovative Solutions</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    // ==========================
+    // Job Card Toggle
+    // ==========================
+    document.querySelectorAll(".job-card").forEach(card => {
+        card.addEventListener("click", function () {
+            this.classList.toggle("open");
+        });
+    });
+
+    // ==========================
+    // Navbar Dropdown
+    // ==========================
+    document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const dropdown = this.parentElement;
+
+            // Close other dropdowns
+            document.querySelectorAll(".dropdown").forEach(item => {
+                if (item !== dropdown) {
+                    item.classList.remove("active");
+                }
+            });
+
+            dropdown.classList.toggle("active");
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown").forEach(item => {
+            item.classList.remove("active");
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
