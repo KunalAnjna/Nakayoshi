@@ -3,27 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+
 <title>Careers - Cosmo Instruments India Pvt. Ltd.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
+:root{
+  --bg:#FAFAF7;
+  --fg:#181A1D;
+  --card:#FFFFFF;
+  --border:#E7E5DE;
+  --muted:#6E7075;
+  --muted-2:#9A9C9F;
+
+  --primary:#E15516;
+  --primary-fg:#FFFFFF;
+
+  --secondary:#14161A;
+  --secondary-fg:#F4F3EF;
+
+  --accent:#E8A33D;
+  --accent-soft:#FBF3E4;
+
+  --radius:16px;
+  --wrap:1240px;
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+}
+
   :root{
-    --navy:#ffffff;
-    --navy-2:#f4f7fb;
-    --panel:#ffffff;
-    --accent:black;
-    --blue:#139dd8d4;
-    --blue-2:#139dd8d4;
-    --text:#182234;
-    --muted:#647085;
-    --line:rgba(33, 72, 146, 0.1);
+    --blue:#008DD2;
+    --blue-dark:#0077AE;
+    --blue-tint:rgba(0,141,210,.12);
+    --navy:#30294B;
+    --navy-light:#473F6E;
+    --navy-pale:#EEF0F7;
+    --red:#E31A20;
+    --red-tint:rgba(227,26,32,.10);
+    --white:#FFFFFF;
+    --black:#0A0A0A;
+    --text-body:#27243A;
+    --text-mid:#6B647F;
+    --on-dark-mid:rgba(255,255,255,.68);
+    --on-dark-faint:rgba(255,255,255,.45);
+    --line:rgba(48,41,75,.14);
+    --line-dark:rgba(255,255,255,.18);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Roboto',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+    --maxw:1180px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
     font-family:'Inter',sans-serif;
-    background:var(--navy);
+    background:white;
     color:var(--text);
     line-height:1.6;
   }
@@ -48,316 +83,58 @@ p{
      
 }
 
-/* LOGO */
-.nav-logo{
-    width: 160px;
-    height: 55px;
+/* ============ HEADER ============ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s ease, box-shadow .4s ease, border-color .4s ease;
+  border-bottom:1px solid transparent;
 }
-
-.logo{
-    width: 100%;
-    height: 100%;
-    background-image: url(cosmologo.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.3s ease;
+.header{
+  background:rgba(250,250,247,.85);
+  backdrop-filter:blur(14px);
+  border-bottom-color:var(--border);
 }
-
-.logo:hover{
-    transform: scale(1.05);
+.header-inner{
+  max-width:var(--wrap);margin:0 auto;padding:0 24px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
 }
-
-/* MENU */
-.menu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{
+  width:115px;height:55px;border-radius:9px;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);
+  font-weight:700;font-size:16px;flex-shrink:0;
 }
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-name{font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--fg);}
+.header.scrolled .brand-name{color:var(--fg);}
+.hero ~ * .brand-name{color:var(--fg);}
 
-/* LINKS */
-.menu a{
-    text-decoration: none;
-    color: black;
-    position: relative;
-    transition: 0.3s;
+.header:not(.scrolled) .brand-name{color:#fff;}
+.brand-sub{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:rgba(110,112,117,.8);font-weight:500;}
+
+
+.nav-desktop{display:flex;align-items:center;gap:28px;}
+.nav-desktop a{font-size:20px;font-weight:500;color:Black;position:relative;transition:color .3s;}
+.header:not(.scrolled) .nav-desktop a{color:black;}
+.nav-desktop a:hover{color:var(--fg);}
+.header:not(.scrolled) .nav-desktop a:hover{color:#fff;}
+.nav-desktop a::after{
+  content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--primary);
+  transition:width .3s;
 }
+.nav-desktop a:hover::after{width:100%;}
 
-/* UNDERLINE */
-.menu a::after{
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    background: rgb(129, 129, 218);
-    left: 0;
-    bottom: -4px;
-    transition: 0.3s;
+.header-cta{display:flex;}
+.menu-toggle{display:none;background:none;border:none;padding:6px;color:var(--fg);}
+.header:not(.scrolled) .menu-toggle{color:#fff;}
+.menu-toggle svg{width:26px;height:26px;}
+
+.nav-mobile{
+  display:none;flex-direction:column;gap:4px;padding:14px 24px 20px;
+  background:var(--bg);border-top:1px solid var(--border);
 }
-
-.menu a:hover::after{
-    width: 100%;
-}
-
-.menu a:hover{
-    color: rgb(129, 129, 218);
-}
-
-/* DROPDOWN */
-.dropdown{
-    position: relative;
-}
-
-.dropdown-menu{
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 220px;
-    background: white;
-    display: none;
-    flex-direction: column;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    opacity: 0;
-    transform: translateY(5px);
-    transition: 0.3s;
-    font-size: 16px;
-}
-
-.dropdown-menu {
-    display: none;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.3s;
-}
-
-.dropdown.active .dropdown-menu {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-}
-.dropdown-menu p{
-    padding: 10px;
-}
-
-.dropdown-menu p:hover{
-    background: #f2f2f2;
-}
-
-/* BUTTON */
-button{
-    background: #FF4742;
-    border: 1px solid #FF4742;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 8px 14px;
-    transition: all 0.3s ease;
-}
-
-button:hover{
-    background: white;
-    color: #FF4742;
-    transform: translateY(2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-#button-tag{
-    color: #ffffff;
-    text-decoration: none;
-}
-
-#button-tag:hover{
-    color: #FF4742;
-}
-
-button:active{
-    transform: scale(0.95);
-}
-.menu a.active {
-    color: rgb(129, 129, 218);
-}
-
-.menu a.active::after {
-    width: 100%;
-}
-
-/* ========================= */
-/* 📱 MOBILE VIEW */
-/* ========================= */
-@media (min-width: 1000px) and (max-width: 1450px){
-
-    .navbar{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        flex-wrap: nowrap;
-    }
-
-    .nav-logo{
-        width: 130px;
-        height: 45px;
-        flex-shrink: 0;
-    }
-
-    .menu{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 25px;
-        flex-wrap: nowrap;
-        /* overflow-x: auto; -- yeh hatao, dropdown block ho raha tha */
-        overflow: visible;
-    }
-
-    .menu::-webkit-scrollbar{
-        display: none;
-    }
-
-    .menu a{
-        font-size: 20px;
-        white-space: nowrap;
-    }
-
-    button{
-        font-size: 12px;
-        padding: 6px 10px;
-        flex-shrink: 0;
-        white-space: nowrap;
-    }
-
-    .dropdown{
-        position: relative;
-    }
-
-    .dropdown-menu{
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 9999;
-    }
-}
-/* ========================= */
-/* 📱 MOBILE SAME LINE NAVBAR */
-/* ========================= */
-
-@media (max-width: 1000px){
-
-    
-    .navbar{ 
-       
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 25px 0 10px;   /* right side extra gap */
-        overflow-x: auto;
-    }
-
-    /* scrollbar hide */
-    
-    .menu::-webkit-scrollbar{
-        display: none;
-    }
-
-    .nav-logo{
-        width: 120px;
-        height: 40px;
-        flex-shrink: 0;
-    }
-
-    .menu{
-        width: 100%;
-        margin-bottom: 3px;
-        padding-right: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        gap: 15px;
-        flex-shrink: 0;
-        
-    }
-
-    .menu a{ 
-        flex-shrink: 0;
-        font-size: 14px;
-        white-space: nowrap;
-    }
-    .dropdown{
-display:flex;
-align-items:center;
-}
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static; /* important */
-        width: 100%;
-    }
-}
-
-.menu{
-padding:0 12px;
-}
-
-.menu{
-overflow-x:auto;
-padding-right:25px;
-}
-    button{
-        font-size: 12px;
-        padding: 6px 10px;
-        margin-left: 10px;
-        flex-shrink: 0;
-    }
-
-    /* dropdown mobile simple 
-    .dropdown-menu{
-        position: absolute;
-        width: 200px;
-    }
-        */
-}
-/* ========================= */
-/* 📲 TABLET VIEW */
-/* ========================= */
-
-@media (max-width: 1023px){
-
-    .navbar{
-        display: flex;
-        justify-content: space-evenly;
-        padding: 10px 25px;
-         overflow-x: auto;
-    }
-
-    .menu{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 10px;
-    }
-      .menu::-webkit-scrollbar{
-        display: none;
-    }
-      button{
-        font-size: 12px;
-        padding: 6px 10px;
-        margin-left: 10px;
-        flex-shrink: 0;
-    }
- .menu a{
-        font-size: 14px;
-        white-space: nowrap;
-    }
-    .nav-logo{
-        width: 130px;
-        height: 45px;
-    }
-}
-
+.nav-mobile a{padding:10px 4px;font-size:15px;font-weight:500;color:var(--fg);}
+.nav-mobile.open{display:flex;}
 
 /* HERO */
   .hero{
@@ -453,6 +230,102 @@ padding-right:25px;
   }
   .btn-apply:hover{transform:translateY(-2px); box-shadow:0 14px 36px rgba(222,55,48,0.45);}
 
+  /* ===== APPLICATION FORM (inline, replaces Apply Here button) ===== */
+  .form-wrap{
+    max-width:800px; margin:8px auto 0; text-align:left;
+    background:#ffffff; border:1px solid var(--line); border-radius:18px;
+    box-shadow:0 24px 60px rgba(10,20,40,0.22); padding:40px;
+  }
+  .form-wrap h3{font-size:1.35rem; font-weight:700; color:var(--blue); margin-bottom:6px;}
+  .form-wrap .sub{color:var(--muted); font-size:.9rem; margin-bottom:28px;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1 / -1;}
+  .field label{font-size:.85rem; font-weight:600; color:var(--fg);}
+  .field label .req{color:var(--primary);}
+  .field input[type="text"],
+  .field input[type="email"],
+  .field input[type="tel"],
+  .field input[type="number"],
+  .field select{
+    padding:12px 14px; border:1px solid var(--line); border-radius:8px;
+    font-size:.92rem; font-family:'Inter',sans-serif; color:var(--fg);
+    background:#FBFBF9; outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .field input:focus, .field select:focus{
+    border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-tint); background:#fff;
+  }
+  .file-drop{
+    border:1.5px dashed var(--blue); border-radius:8px;
+    padding:22px; text-align:center; background:#FBFBF9;
+    cursor:pointer; transition:background .2s ease; position:relative;
+  }
+  .file-drop:hover{background:var(--blue-tint);}
+  .file-drop input[type="file"]{
+    position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+  }
+  .file-drop .icon{font-size:1.4rem; color:var(--blue); margin-bottom:6px;}
+  .file-drop .label{font-size:.88rem; font-weight:600; color:var(--blue);}
+  .file-drop .hint{font-size:.78rem; color:var(--muted); margin-top:4px;}
+  #fileName{font-size:.82rem; color:var(--blue); margin-top:8px; font-weight:600;}
+
+  .preview-card{
+    display:flex; align-items:center; gap:14px;
+    margin-top:14px; padding:14px 16px;
+    background:#FBFBF9; border:1px solid var(--line); border-radius:8px;
+  }
+  .preview-card .thumb{
+    width:52px; height:52px; border-radius:8px; background:var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:800; font-size:.72rem; flex-shrink:0; overflow:hidden;
+  }
+  .preview-card .thumb img{width:100%; height:100%; object-fit:cover;}
+  .preview-card .info{flex:1; min-width:0;}
+  .preview-card .info .name{font-weight:600; font-size:.88rem; color:var(--fg); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .preview-card .info .meta{font-size:.78rem; color:var(--muted); margin-top:2px;}
+  .preview-card .view-link{font-size:.82rem; font-weight:700; color:var(--blue); flex-shrink:0;}
+  .pdf-embed{
+    margin-top:12px; width:100%; height:340px; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  .pdf-embed iframe{width:100%; height:100%; border:none;}
+
+  .mail-note{
+    text-align:center; font-size:.8rem; color:var(--muted); margin-top:14px;
+  }
+
+  .consent{
+    display:flex; align-items:flex-start; gap:10px; margin-top:8px;
+    font-size:.85rem; color:var(--muted);
+  }
+  .consent input{margin-top:3px;}
+
+  .btn-submit{
+    width:100%; margin-top:28px;
+    background:var(--primary);
+    color:#ffffff; font-weight:700; font-size:1rem;
+    padding:16px; border:none; border-radius:8px;
+    cursor:pointer; box-shadow:0 10px 26px rgba(225,85,22,0.30);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-submit:hover{transform:translateY(-2px); box-shadow:0 14px 32px rgba(225,85,22,0.40);}
+  .btn-submit:disabled{opacity:.7; cursor:not-allowed; transform:none;}
+
+  .success-box{
+    display:none; text-align:center; padding:36px 20px;
+  }
+  .success-box .tick{
+    width:64px; height:64px; border-radius:50%; background:var(--blue-tint);
+    color:var(--blue); font-size:1.8rem; display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px; font-weight:800;
+  }
+  .success-box h3{color:var(--blue); margin-bottom:8px;}
+  .success-box p{color:var(--muted); font-size:.92rem;}
+
+  @media (max-width:640px){
+    .form-wrap{padding:26px;}
+    .form-grid{grid-template-columns:1fr;}
+  }
+
   /* WHY WORK */
   .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;}
   .why-card{text-align:center; padding:10px;}
@@ -467,111 +340,15 @@ padding-right:25px;
 /* FOOTER */
 
 /* ================= FOOTER ================= */
-.footer {
-    padding: 60px 40px;
-    color: #fff;
-
-    background: 
-        linear-gradient(rgba(11, 28, 52, 0.85), rgba(11, 28, 52, 0.85)),
-        url('footerimage.jpeg');
-
-    background-size: cover;
-    background-position: center;
-}
-
-/* CONTAINER */
-.footer-container {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap; /* 🔥 important */
-}
-
-/* COLUMN */
-.footer-col {
-    flex: 1 1 220px; /* 🔥 responsive width */
-    min-width: 200px;
-}
-
-/* HEADINGS */
-.footer-col h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    position: relative;
-}
-
-/* underline */
-.footer-col h3::after {
-    content: "";
-    width: 40px;
-    height: 3px;
-    background: #1e6fa3;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-}
-
-/* LINKS */
-.footer-col a {
-    display: block;
-    color: #ccc;
-    margin: 8px 0;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.footer-col a:hover {
-    color: #fff;
-    transform: translateX(5px); /* 🔥 small animation */
-}
-
-/* TEXT */
-.footer-col p {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #ccc;
-}
-
-/* SOCIAL ICONS */
-.social-icons {
-    margin-top: 15px;
-}
-
-.social-icons a {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    background: #1e6fa3;
-    color: white;
-    text-align: center;
-    line-height: 35px;
-    margin-right: 8px;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.social-icons a:hover {
-    background: #0c4d75;
-    transform: translateY(-3px);
-}
-
-/* BOTTOM */
-.footer-bottom {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 14px;
-    color: #aaa;
-
-}
-.footer-bottom p{
-text-align: center;
-}
-.footer-col p{
-    text-align: left;}
-
+ footer{background:var(--navy);padding:64px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  .foot-logo-badge{display:inline-flex;background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:16px;}
+  .foot-logo-badge img{height:48px;width:auto;}
+  .foot-grid h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8FD2F2;margin:0 0 16px;}
+  .foot-grid li{margin-bottom:9px;font-size:13.8px;color:var(--on-dark-mid);}
+  .foot-grid li a:hover{color:#fff;}
+  .foot-about p{font-size:13.6px;color:var(--on-dark-mid);max-width:300px;margin:0;}
+  .foot-bottom{border-top:1px solid var(--line-dark);padding-top:22px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;color:var(--on-dark-faint);flex-wrap:wrap;gap:10px;}
 /* ================= RESPONSIVE ================= */
 
 /* TABLET */
@@ -636,7 +413,7 @@ text-align: center;
  <header id="site-header" class="header">
   <div class="header-inner">
     <a href="index.html" class="brand">
-      <div class="brand-logo"><img src="Assets/Logo.jpeg" alt=""></div>
+      <div class="brand-logo"><img src="Assets/Logo.png" alt=""></div>
      
     </a>
     <nav class="nav-desktop">
@@ -785,63 +562,136 @@ text-align: center;
   </div>
 </section>
 
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Internship Program</span>
-      <h2>Hands-on Training</h2>
-    </div>
-    <div class="intern-list">
-      <div class="intern-card"><p>Training on air leak tester and flow testers.</p></div>
-      <div class="intern-card"><p>Training on leak testing machines and other SPMs.</p></div>
-      <div class="intern-card"><p>Training on air leak tester calibration and repair.</p></div>
-    </div>
-  </div>
-</section>
+
 
 <section class="cta-band">
   <div class="wrap">
     <h2>Ready to build your career with Cosmo?</h2>
-    <p>Submit your application and our HR team will get in touch with the next steps.</p>
-    <a href="Apply.html" target="_blank" rel="noopener" class="btn-apply">Apply Here</a>
+    <p>Submit your application below and our HR team will get in touch with the next steps.</p>
+
+    <div class="form-wrap">
+
+      <div id="formView">
+        <h3>Job Application Form</h3>
+        <div class="sub">Fields marked <span style="color:var(--primary);">*</span> are required.</div>
+
+        <form id="applyForm" action="send-mail.php" method="POST" enctype="multipart/form-data">
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Name <span class="req">*</span></label>
+              <input type="text" name="name" required placeholder="Your full name">
+            </div>
+
+            <div class="field">
+              <label>Age <span class="req">*</span></label>
+              <input type="number" name="age" min="18" max="65" required placeholder="Your age">
+            </div>
+
+            <div class="field">
+              <label>Location <span class="req">*</span></label>
+              <select name="location" required>
+                <option value="" disabled selected>Select location</option>
+                <option>Manesar</option>
+                <option>Bengaluru</option>
+                <option>Chennai</option>
+                <option>Gujarat</option>
+                <option>Pune</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>E-mail ID <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="you@example.com">
+            </div>
+
+            <div class="field">
+              <label>Contact No <span class="req">*</span></label>
+              <input type="tel" name="contact" required placeholder="10-digit mobile number">
+            </div>
+
+            <div class="field">
+              <label>Educational Qualification <span class="req">*</span></label>
+              <select name="qualification" required>
+                <option value="" disabled selected>Select qualification</option>
+                <option>Diploma</option>
+                <option>B.E / B.Tech</option>
+                <option>Degree</option>
+                <option>B.Com</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Work Experience <span class="req">*</span></label>
+              <select name="experience" required>
+                <option value="" disabled selected>Select experience</option>
+                <option>Fresher</option>
+                <option>1-2 years</option>
+                <option>2-3 years</option>
+                <option>5-8 years</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Position Applying For <span class="req">*</span></label>
+              <select name="position" required>
+                <option value="" disabled selected>Select position</option>
+                <option>Service Engineer (Fresher)</option>
+                <option>Service Engineer (1-2 Years experience)</option>
+                <option>Assembly Engineer (Fresher)</option>
+                <option>Assembly Engineer (1-2 Years experience)</option>
+                <option>Design Engineer (Fresher)</option>
+                <option>Design Engineer (1-2 Years experience)</option>
+                <option>Account Executive (5-8 Years Experience)</option>
+                <option>Sales Executive (Fresher)</option>
+                <option>Sales Executive (2-3 Years experience)</option>
+                <option>Technical Sales Executive (Fresher)</option>
+                <option>Technical Sales Executive (2-3 Years experience)</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Upload Resume <span class="req">*</span></label>
+              <div class="file-drop">
+                <input type="file" name="resume_attachment" id="resumeInput" accept=".pdf,.doc,.docx" required>
+                <div class="icon">&#8593;</div>
+                <div class="label">Click to upload or drag your resume here</div>
+                <div class="hint">PDF or Word file, up to 5MB</div>
+              </div>
+              <div id="fileName"></div>
+              <div id="resumePreview"></div>
+            </div>
+
+            <div class="field full">
+              <label class="consent">
+                <input type="checkbox" required>
+                <span>I agree with the handling of my personal information as per Cosmo Instruments India's Privacy Policy.</span>
+              </label>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+          <div class="mail-note">Submitting this form will automatically email your details and resume to our HR team.</div>
+        </form>
+      </div>
+
+      <div class="success-box" id="successBox">
+        <div class="tick">&#10003;</div>
+        <h3>Application Submitted!</h3>
+        <p>Thank you for applying to Cosmo Instruments India. Your details and resume have been emailed to our HR team &mdash; they will review it and reach out to you soon.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Why Cosmo</span>
-      <h2>Why Choose Us?</h2>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="ico">54+</div>
-        <h4>Legacy & Expertise</h4>
-        <p>Decades of Japanese engineering heritage combined with 17+ years of Indian market leadership.</p>
-      </div>
-      <div class="why-card">
-        <div class="ico">#1</div>
-        <h4>Market Leadership</h4>
-        <p>India's No.1 market share in air leak testing, trusted by over 1,000 direct customers.</p>
-      </div>
-      <div class="why-card">
-        <div class="ico">🏭</div>
-        <h4>In-house Manufacturing</h4>
-        <p>Design, build and support end-to-end — from installation to calibration and after-sales service.</p>
-      </div>
-      <div class="why-card">
-        <div class="ico">🌍</div>
-        <h4>Pan-India Presence</h4>
-        <p>Facilities across Gurugram, Manesar, Bengaluru, Pune, Chennai and Gujarat.</p>
-      </div>
-    </div>
-  </div>
-</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-about">
-        <div class="foot-logo-badge"><img src="Assets/logo.jpeg" alt="Nakayoshi India Pvt. Ltd."></div>
+        <div class="foot-logo-badge"><img src="Assets/Logo.png" alt="Nakayoshi India Pvt. Ltd."></div>
         <p>Nakayoshi India Pvt. Ltd. designs and builds custom automation systems and production machinery for manufacturers across India — from concept through commissioning and long-term support.</p>
       </div>
       <div>
@@ -867,7 +717,8 @@ text-align: center;
         <h5>Contact</h5>
         <ul>
           <li>Nakayoshi India Pvt. Ltd.</li>
-          <li>MIDC Industrial Area, Pune,<br>Maharashtra 411019, India</li>
+          <li>Sector-102, Gurugram,Haryana 122001</li>
+          <li>Aarnav, Bahucharaji Highway,  Naviyani, Gujarat 363750</li>
           <li>+91 98220 47711</li>
           <li>engineering@nakayoshi.tech</li>
         </ul>
@@ -919,6 +770,115 @@ text-align: center;
         document.querySelectorAll(".dropdown").forEach(item => {
             item.classList.remove("active");
         });
+    });
+
+    // ==========================
+    // Resume Preview
+    // ==========================
+    const resumeInput = document.getElementById("resumeInput");
+    const fileName = document.getElementById("fileName");
+    const resumePreview = document.getElementById("resumePreview");
+
+    function formatFileSize(bytes) {
+        if (bytes < 1024) return `${bytes} B`;
+        if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+        return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+
+    resumeInput?.addEventListener("change", () => {
+
+        resumePreview.innerHTML = "";
+        fileName.textContent = "";
+
+        const file = resumeInput.files[0];
+
+        if (!file) return;
+
+        fileName.textContent = `✓ Selected: ${file.name}`;
+
+        const fileURL = URL.createObjectURL(file);
+        const ext = file.name.split(".").pop().toLowerCase();
+
+        const card = document.createElement("div");
+        card.className = "preview-card";
+
+        card.innerHTML = `
+            <div class="thumb">${ext.toUpperCase()}</div>
+
+            <div class="info">
+                <div class="name">${file.name}</div>
+                <div class="meta">${formatFileSize(file.size)}</div>
+            </div>
+
+            <a class="view-link"
+               href="${fileURL}"
+               target="_blank"
+               rel="noopener">
+                Open ↗
+            </a>
+        `;
+
+        resumePreview.appendChild(card);
+
+        if (ext === "pdf") {
+
+            const pdf = document.createElement("div");
+            pdf.className = "pdf-embed";
+
+            pdf.innerHTML = `
+                <iframe src="${fileURL}"></iframe>
+            `;
+
+            resumePreview.appendChild(pdf);
+        }
+
+    });
+
+    // ==========================
+    // Apply Form
+    // ==========================
+    const form = document.getElementById("applyForm");
+
+    form?.addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("submitBtn");
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+
+        // resume_attachment stays in formData so our PHP backend
+        // emails it as a real file attachment automatically.
+        const formData = new FormData(this);
+
+        try {
+
+            const response = await fetch(this.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.ok) {
+                throw new Error(result.error || "Submission Failed");
+            }
+
+            document.getElementById("formView").style.display = "none";
+            document.getElementById("successBox").style.display = "block";
+
+        } catch (error) {
+
+            alert("Something went wrong. Please try again. (" + error.message + ")");
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Application";
+        }
+
     });
 
 });
