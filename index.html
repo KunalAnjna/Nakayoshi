@@ -347,6 +347,21 @@ input,select,textarea{font-family:inherit;}
 .form-field input:focus,.form-field select:focus,.form-field textarea:focus{
   border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,85,22,.12);
 }
+.form-field.error input,.form-field.error select,.form-field.error textarea{
+  border-color:#E31A20;box-shadow:0 0 0 3px rgba(227,26,32,.10);
+}
+.field-error{font-size:11px;color:#E31A20;font-weight:500;display:none;margin-top:2px;}
+.form-field.error .field-error{display:block;}
+.phone-input-group{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:11px;background:#FBFBF9;overflow:hidden;transition:border-color .25s, box-shadow .25s;}
+.phone-input-group:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,85,22,.12);}
+.phone-cc{
+  display:flex;align-items:center;gap:6px;padding:12px 12px;font-size:14px;font-weight:600;color:var(--fg);
+  background:rgba(0,0,0,.03);border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0;user-select:none;
+}
+.phone-input-group input{
+  border:none;background:transparent;border-radius:0;box-shadow:none !important;flex:1;min-width:0;
+}
+.form-field.error .phone-input-group{border-color:#E31A20;box-shadow:0 0 0 3px rgba(227,26,32,.10);}
 .form-note{font-size:11px;color:var(--muted-2);text-align:center;margin:2px 0 0;}
  footer{background:var(--navy);padding:64px 0 30px;}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
@@ -728,7 +743,7 @@ Not a Catalog.</h2>
             <span><span class="contact-label">Location</span><span class="contact-value">Sector-102,Gurugram 122001
             </br>
           </br>
-          AARNAV, BAHUCHARAJI HIGHWAY,  Naviyani, Gujarat 363750
+         Aarnav, Bahucharaji Highway, Naviyani, Gujarat 363750
             </span></span>
           </div>
         </div>
@@ -739,7 +754,7 @@ Not a Catalog.</h2>
       </div>
 
       <div class="form-card animate-on-scroll">
-        <form id="contact-form">
+        <form id="contact-form" novalidate>
           <h3 class="form-title">Request a Consultation</h3>
           <div class="form-row">
             <div class="form-field">
@@ -752,13 +767,18 @@ Not a Catalog.</h2>
             </div>
           </div>
           <div class="form-row">
-            <div class="form-field">
+            <div class="form-field" id="email-field">
               <label>Email *</label>
-              <input type="email" name="email" required placeholder="r.sharma@company.com">
+              <input type="email" name="email" id="email-input" required placeholder="rajesh@gmail.com" autocomplete="email">
+              <span class="field-error" id="email-error">Please enter a valid email address.</span>
             </div>
-            <div class="form-field">
-              <label>Phone</label>
-              <input type="tel" name="phone" placeholder="+91 98765 43210">
+            <div class="form-field" id="phone-field">
+              <label>Phone *</label>
+              <div class="phone-input-group">
+                <span class="phone-cc">🇮🇳 +91</span>
+                <input type="tel" name="phone" id="phone-input" required placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel-national">
+              </div>
+              <span class="field-error" id="phone-error">Enter a valid 10-digit mobile number.</span>
             </div>
           </div>
           <div class="form-field">
@@ -821,7 +841,8 @@ Not a Catalog.</h2>
         <h5>Contact</h5>
         <ul>
           <li>Nakayoshi India Pvt. Ltd.</li>
-          <li>MIDC Industrial Area, Pune,<br>Maharashtra 411019, India</li>
+          <li>Sector-102, Gurugram,Haryana 122001</li>
+          <li>Aarnav, Bahucharaji Highway,  Naviyani, Gujarat 363750</li>
           <li>+91 98220 47711</li>
           <li>engineering@nakayoshi.tech</li>
         </ul>
@@ -871,15 +892,107 @@ Not a Catalog.</h2>
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => observer.observe(el));
 
-  /* Contact form submit (demo only — no backend) */
+  /* ---------- Contact form validation + submit ---------- */
   const form = document.getElementById('contact-form');
-  form.addEventListener('submit', (e) => {
+  const emailField = document.getElementById('email-field');
+  const emailInput = document.getElementById('email-input');
+  const emailError = document.getElementById('email-error');
+  const phoneField = document.getElementById('phone-field');
+  const phoneInput = document.getElementById('phone-input');
+  const phoneError = document.getElementById('phone-error');
+
+  // Only allow digits in the phone field, capped at 10 digits
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    clearError(phoneField);
+  });
+  phoneInput.addEventListener('paste', (e) => {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"] span');
-    const original = btn.textContent;
-    btn.textContent = 'Thank you — we\'ll be in touch!';
-    form.reset();
-    setTimeout(() => { btn.textContent = original; }, 3000);
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = pasted.replace(/\D/g, '').slice(0, 10);
+    phoneInput.value = digits;
+    clearError(phoneField);
+  });
+
+  emailInput.addEventListener('input', () => clearError(emailField));
+
+  function clearError(fieldEl){
+    fieldEl.classList.remove('error');
+  }
+  function showError(fieldEl){
+    fieldEl.classList.add('error');
+  }
+
+  // Must be a proper, valid @gmail.com address (e.g. name123@gmail.com)
+  function isValidGmail(value){
+    const gmailPattern = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]{0,63})@gmail\.com$/;
+    return gmailPattern.test(value.trim().toLowerCase());
+  }
+
+  // Must be exactly 10 digits, no more, no less, and start 6-9 (valid Indian mobile)
+  function isValidPhone(value){
+    return /^[6-9]\d{9}$/.test(value.trim());
+  }
+
+  function validateForm(){
+    let valid = true;
+
+    if (!isValidGmail(emailInput.value)) {
+      showError(emailField);
+      valid = false;
+    } else {
+      clearError(emailField);
+    }
+
+    if (!isValidPhone(phoneInput.value)) {
+      showError(phoneField);
+      valid = false;
+    } else {
+      clearError(phoneField);
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      const firstError = form.querySelector('.form-field.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const btnText = btn.querySelector('span');
+    const original = btnText.textContent;
+
+    btn.disabled = true;
+    btnText.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(form);
+      // send phone with country code prefix
+      formData.set('phone', '+91' + phoneInput.value);
+
+      const res = await fetch('send-mail.php', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        btnText.textContent = "Thank you — we'll be in touch!";
+        form.reset();
+      } else {
+        btnText.textContent = data.message || 'Something went wrong. Try again.';
+      }
+    } catch (err) {
+      btnText.textContent = 'Network error. Please try again.';
+    } finally {
+      btn.disabled = false;
+      setTimeout(() => { btnText.textContent = original; }, 3500);
+    }
   });
 
 });
