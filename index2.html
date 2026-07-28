@@ -5,16 +5,424 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Nakayoshi India — Custom Automation &amp; Machine Building</title>
 <meta name="description" content="Nakayoshi India Pvt. Ltd. builds custom automation machines, robotic systems, and conveyor lines for 12+ industries across India. 340+ machines deployed since 2014."/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="style.css" class="css">
+
+<style>/* ============ TOKENS ============ */
+:root{
+  --bg:#FAFAF7;
+  --fg:#181A1D;
+  --card:#FFFFFF;
+  --border:#E7E5DE;
+  --muted:#6E7075;
+  --muted-2:#9A9C9F;
+
+  --primary:#E15516;
+  --primary-fg:#FFFFFF;
+
+  --secondary:#14161A;
+  --secondary-fg:#F4F3EF;
+
+  --accent:#E8A33D;
+  --accent-soft:#FBF3E4;
+
+  --radius:16px;
+  --wrap:1240px;
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+}
+
+  :root{
+    --blue:#008DD2;
+    --blue-dark:#0077AE;
+    --blue-tint:rgba(0,141,210,.12);
+    --navy:#30294B;
+    --navy-light:#473F6E;
+    --navy-pale:#EEF0F7;
+    --red:#E31A20;
+    --red-tint:rgba(227,26,32,.10);
+    --white:#FFFFFF;
+    --black:#0A0A0A;
+    --text-body:#27243A;
+    --text-mid:#6B647F;
+    --on-dark-mid:rgba(255,255,255,.68);
+    --on-dark-faint:rgba(255,255,255,.45);
+    --line:rgba(48,41,75,.14);
+    --line-dark:rgba(255,255,255,.18);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Roboto',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+    --maxw:1180px;
+  }
+
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font-body);
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
+.wrap2{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
+
+
+/* ============ TYPE HELPERS ============ */
+.italic-accent{font-style:italic;font-weight:300;color:var(--accent);}
+.italic-accent-2{font-style:italic;font-weight:300;color:var(--accent);}
+.italic-muted{font-style:italic;font-weight:300;color:var(--muted);}
+
+.eyebrow{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-bottom:.7rem;}
+.eyebrow-primary{color:var(--primary);}
+.eyebrow-accent{color:rgba(232,163,61,.75);}
+
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.85rem);line-height:1.05;font-weight:600;letter-spacing:-0.02em;}
+.section-title.light{color:white}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;
+  border:1px solid transparent;transition:all .3s ease;position:relative;overflow:hidden;
+}
+.btn-primary{background:var(--primary);color:var(--primary-fg);}
+.btn-primary:hover{box-shadow:0 10px 30px -8px rgba(225,85,22,.55);transform:translateY(-1px);}
+.btn-outline{border-color:rgba(255,255,255,.28);color:#fff;}
+.btn-outline:hover{background:rgba(255,255,255,.1);}
+.btn-lg{padding:15px 30px;}
+.btn-block{width:100%;margin-top:6px;}
+.icon-arrow{width:16px;height:16px;transition:transform .3s;}
+.btn:hover .icon-arrow{transform:translateX(4px);}
+
+.btn-shimmer::before{
+  content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(115deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);
+}
+.btn-shimmer:hover::before{animation:shimmer 1.1s ease forwards;}
+@keyframes shimmer{to{left:140%;}}
+
+/* ============ HEADER ============ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s ease, box-shadow .4s ease, border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+.header{
+  background:rgba(250,250,247,.85);
+  backdrop-filter:blur(14px);
+  border-bottom-color:var(--border);
+}
+.header-inner{
+  max-width:var(--wrap);margin:0 auto;padding:0 24px;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-logo{
+  width:115px;height:55px;border-radius:9px;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);
+  font-weight:700;font-size:16px;flex-shrink:0;
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-name{font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--fg);}
+.header.scrolled .brand-name{color:var(--fg);}
+.hero ~ * .brand-name{color:var(--fg);}
+
+.header:not(.scrolled) .brand-name{color:#fff;}
+.brand-sub{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:rgba(110,112,117,.8);font-weight:500;}
+
+
+.nav-desktop{display:flex;align-items:center;gap:28px;}
+.nav-desktop a{font-size:20px;font-weight:500;color:Black;position:relative;transition:color .3s;}
+.header:not(.scrolled) .nav-desktop a{color:black;}
+.nav-desktop a:hover{color:var(--fg);}
+.header:not(.scrolled) .nav-desktop a:hover{color:#fff;}
+.nav-desktop a::after{
+  content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--primary);
+  transition:width .3s;
+}
+.nav-desktop a:hover::after{width:100%;}
+
+.header-cta{display:flex;}
+.menu-toggle{display:none;background:none;border:none;padding:6px;color:var(--fg);}
+.header:not(.scrolled) .menu-toggle{color:#fff;}
+.menu-toggle svg{width:26px;height:26px;}
+
+.nav-mobile{
+  display:none;flex-direction:column;gap:4px;padding:14px 24px 20px;
+  background:var(--bg);border-top:1px solid var(--border);
+}
+.nav-mobile a{padding:10px 4px;font-size:15px;font-weight:500;color:var(--fg);}
+.nav-mobile.open{display:flex;}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img,
+.hero-bg video{ margin-top: 70px; position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-gradient-1{position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,.78), rgba(0,0,0,.5) 45%, rgba(0,0,0,.2));}
+.hero-gradient-2{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6), transparent 50%, rgba(0,0,0,.25));}
+.hero-grain{position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.hero-blob{
+  position:absolute;top:18%;right:12%;width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle, rgba(225,85,22,.5), transparent 70%);
+  filter:blur(50px);opacity:.5;pointer-events:none;
+}
+.hero-spacer{height:70px;position:relative;z-index:1;}
+.hero-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 24px;max-width:var(--wrap);margin:0 auto;width:100%;}
+.hero-inner{max-width:640px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);backdrop-filter:blur(6px);
+  margin-bottom:2rem;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.8);font-weight:500;
+}
+.pulse-dot{position:relative;width:8px;height:8px;display:inline-flex;}
+.pulse-ping{position:absolute;inset:0;border-radius:50%;background:var(--primary);opacity:.7;animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite;}
+.pulse-core{position:relative;width:8px;height:8px;border-radius:50%;background:var(--primary);}
+@keyframes ping{75%,100%{transform:scale(2.2);opacity:0;}}
+
+.hero-title{font-family:var(--font-display);font-size:clamp(2.6rem,7vw,4.6rem);line-height:.95;color:#fff;font-weight:600;letter-spacing:-0.02em;margin:0 0 1.5rem;}
+.hero-desc{font-size:clamp(1.05rem,1.6vw,1.25rem);font-weight:300;line-height:1.6;color:rgba(255,255,255,.8);max-width:34rem;margin:0 0 2.4rem;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+
+.hero-stats{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.42);backdrop-filter:blur(10px);}
+.hero-stats-inner{max-width:var(--wrap);margin:0 auto;padding:20px 24px;display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0;border-right:1px solid rgba(255,255,255,.1);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:var(--font-display);font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:600;color:#fff;letter-spacing:-0.01em;}
+.stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);font-weight:500;margin-top:2px;}
+.stat-num.dark{color:var(--secondary-fg);}
+.stat-label.dark{color:rgba(244,243,239,.5);}
+
+.ticker{position:relative;z-index:1;background:var(--primary);overflow:hidden;padding:12px 0;}
+.ticker-track{display:flex;justify-content:flex-end;white-space:nowrap;width:max-content;animation:tickerScroll 24s linear infinite;}
+.ticker-item{display:inline-flex;align-items:center;color:#fff;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:0 32px;}
+.ticker-item i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);margin-left:32px;display:inline-block;}
+@keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+
+
+/* ============ SECTIONS ============ */
+  section{padding:96px 0;position:relative;}
+  .section-head{max-width:620px;margin:0 0 52px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+  h2{font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.01em;margin:0 0 14px;color:var(--navy);}
+  .section-head p{color:rgba(255, 255, 255, 0.8);font-size:15.5px;margin:0;}
+
+
+.section2{padding:5.5rem 0;}
+.section-bg{background:var(--bg);}
+.section-dark{background:var(--secondary);color:var(--secondary-fg);}
+.section-accent{background:var(--accent-soft);}
+.section-accent-2{background:#FCF6EA;}
+
+.section-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:3.2rem;}
+.section-note{max-width:22rem;font-size:14px;color:var(--muted);font-weight:300;line-height:1.6;}
+.section-note.right{text-align:right;}
+.muted-dark{color:rgba(244,243,239,.6);}
+
+.grid{display:grid;gap:20px;}
+.grid-2{grid-template-columns:1fr 1fr;}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.gap-sm{gap:16px;}
+
+
+  /* ---------- solutions grid ---------- */
+  .solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .sol-card{position:relative;border:1px solid var(--line);border-radius:10px;background:#fff;padding:28px 24px;transition:border-color .15s, transform .15s, box-shadow .15s;}
+  .sol-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(48,41,75,.35);}
+  .sol-card .icon{width:42px;height:42px;border-radius:8px;background:var(--blue-tint);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .sol-card .icon svg{width:22px;height:22px;stroke:var(--blue);}
+  .sol-card h3{font-family:var(--font-display);font-size:17.5px;margin:0 0 10px;font-weight:600;color:var(--navy);}
+  .sol-card p{font-size:14px;color:var(--text-mid);margin:0 0 14px;}
+  .sol-card .tag{font-family:var(--font-mono);font-size:10.5px;color:var(--red);letter-spacing:.06em;text-transform:uppercase;}
+
+/* ============ PROJECTS ============ */
+.projects-section{padding-bottom:4rem;}
+.projects-scroll{
+  display:flex;gap:20px;overflow-x:auto;padding:6px 24px 16px;scroll-snap-type:x mandatory;
+}
+.projects-scroll::-webkit-scrollbar{height:6px;}
+.projects-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:8px;}
+.project-card{
+  position:relative;flex-shrink:0;width:78vw;max-width:400px;aspect-ratio:4/3;
+  border-radius:22px;overflow:hidden;scroll-snap-align:start;cursor:pointer;
+}
+.project-card img{width:100%;height:100%;object-fit:cover;transition:filter .7s ease, transform .7s ease;}
+.project-card:hover img{filter:grayscale(0);transform:scale(1.05);}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.15) 55%, transparent);}
+.project-info{position:absolute;left:0;right:0;bottom:0;padding:22px;transform:translateY(6px);transition:transform .5s;}
+.project-card:hover .project-info{transform:translateY(0);}
+.project-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.tag-primary{color:var(--primary);background:rgba(225,85,22,.22);backdrop-filter:blur(4px);}
+.dim{font-size:10px;color:rgba(255,255,255,.55);font-weight:500;}
+.project-info h3{font-family:var(--font-display);font-size:1.2rem;color:#fff;font-weight:600;margin:0;letter-spacing:-0.01em;}
+.projects-note{color:rgba(244,243,239,.35);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-top:1.2rem;}
+
+/* ============ PROCESS ============ */
+  .process-line{position:relative;padding-top:8px;}
+  .process-line::before{
+    content:"";position:absolute;top:25px;left:0;right:0;height:1px;
+    background:var(--line);z-index:0;
+  }
+  .process-track{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;position:relative;z-index:1;}
+  .process-step{display:flex;flex-direction:column;align-items:flex-start;padding:0 4px 0 0;}
+  .process-step .step-num{
+    width:50px;height:50px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;flex-shrink:0;
+    font-family:var(--font-mono);font-size:14px;font-weight:600;
+    box-shadow:0 0 0 6px var(--bg);
+  }
+  .process-step h4{font-family:var(--font-display);font-size:15.5px;margin:0 0 8px;font-weight:600;color:var(--navy);}
+  .process-step p{font-size:13.2px;color:var(--text-mid);margin:0;line-height:1.55;}
+
+/* ============ INDUSTRIES ============ */
+.stats-panel{background:var(--secondary);border-radius:26px;padding:2.6rem 2rem;margin-bottom:3.5rem;}
+.stats-panel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+
+.industries-grid{align-items:start;}
+.mini-card{padding:20px;transition:border-color .35s, box-shadow .35s;opacity:0;transform:translateY(20px);}
+.mini-card.in-view{opacity:1;transform:translateY(0);}
+.mini-card:hover{border-color:rgba(225,85,22,.3);box-shadow:0 12px 26px -16px rgba(0,0,0,.16);}
+.mini-card .emoji{font-size:1.5rem;display:block;margin-bottom:.7rem;}
+.mini-card h3{font-size:14px;font-weight:600;margin:0 0 2px;}
+.mini-card p{font-size:12px;color:var(--muted);font-weight:500;margin:0;}
+
+.reason-list{display:flex;flex-direction:column;gap:14px;}
+.reason-item{display:flex;gap:16px;padding:18px;transition:border-color .35s, box-shadow .35s;opacity:0;transform:translateY(20px);}
+.reason-item.in-view{opacity:1;transform:translateY(0);}
+.reason-item:hover{border-color:rgba(225,85,22,.3);box-shadow:0 12px 26px -16px rgba(0,0,0,.16);}
+.reason-num{
+  width:32px;height:32px;border-radius:50%;background:rgba(225,85,22,.1);border:1px solid rgba(225,85,22,.2);
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--primary);flex-shrink:0;
+}
+.reason-item h3{font-size:14px;font-weight:600;margin:0 0 4px;}
+.reason-item p{font-size:12.5px;color:var(--muted);font-weight:300;line-height:1.6;margin:0;}
+
+/* ============ TESTIMONIALS ============ */
+.testi-card{padding:32px;display:flex;flex-direction:column;gap:22px;transition:border-color .4s, box-shadow .4s;opacity:0;transform:translateY(20px);}
+.testi-card.in-view{opacity:1;transform:translateY(0);}
+.testi-card:hover{border-color:rgba(225,85,22,.3);box-shadow:0 16px 36px -18px rgba(0,0,0,.16);}
+.quote-icon{color:rgba(225,85,22,.22);}
+.testi-quote{font-size:14px;font-style:italic;font-weight:300;line-height:1.7;color:rgba(24,26,29,.82);flex:1;margin:0;}
+.testi-author{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--border);}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--secondary);color:var(--secondary-fg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+.author-name{font-size:13.5px;font-weight:600;margin:0;}
+.author-role{font-size:11.5px;color:var(--muted);margin:2px 0 0;}
+
+/* ============ CONTACT ============ */
+.contact-grid{align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:2rem;opacity:0;transform:translateY(20px);transition:all .6s;}
+.contact-info.in-view{opacity:1;transform:translateY(0);}
+.contact-links{display:flex;flex-direction:column;gap:1.1rem;}
+.contact-link{display:flex;align-items:center;gap:14px;}
+.contact-icon{
+  width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;
+}
+.contact-icon svg{width:16px;height:16px;color:var(--accent);}
+.contact-link:hover .contact-icon{background:rgba(225,85,22,.18);border-color:rgba(225,85,22,.3);}
+.contact-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(244,243,239,.4);font-weight:500;}
+.contact-value{display:block;font-size:14px;font-weight:600;color:var(--secondary-fg);margin-top:1px;}
+.quote-box{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:18px;padding:22px;}
+.quote-text{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--secondary-fg);margin:0 0 6px;}
+.quote-sig{font-size:13px;color:rgba(244,243,239,.5);margin:0;}
+
+.form-card{
+  background:var(--card);border-radius:24px;border:1px solid rgba(255,255,255,.1);padding:2.2rem;color:var(--fg);
+  opacity:0;transform:translateY(20px);transition:all .6s;
+}
+.form-card.in-view{opacity:1;transform:translateY(0);}
+.form-title{font-family:var(--font-display);font-size:1.3rem;font-weight:600;margin:0 0 1rem;}
+#contact-form{display:flex;flex-direction:column;gap:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-field{display:flex;flex-direction:column;gap:6px;}
+.form-field label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.form-field input,.form-field select,.form-field textarea{
+  padding:12px 14px;border-radius:11px;border:1px solid var(--border);background:#FBFBF9;font-size:14px;color:var(--fg);
+  transition:border-color .25s, box-shadow .25s; outline:none;
+}
+.form-field textarea{resize:none;line-height:1.5;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+  border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,85,22,.12);
+}
+.form-field.error input,.form-field.error select,.form-field.error textarea{
+  border-color:#E31A20;box-shadow:0 0 0 3px rgba(227,26,32,.10);
+}
+.field-error{font-size:11px;color:#E31A20;font-weight:500;display:none;margin-top:2px;}
+.form-field.error .field-error{display:block;}
+.phone-input-group{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:11px;background:#FBFBF9;overflow:hidden;transition:border-color .25s, box-shadow .25s;}
+.phone-input-group:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,85,22,.12);}
+.phone-cc{
+  display:flex;align-items:center;gap:6px;padding:12px 12px;font-size:14px;font-weight:600;color:var(--fg);
+  background:rgba(0,0,0,.03);border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0;user-select:none;
+}
+.phone-input-group input{
+  border:none;background:transparent;border-radius:0;box-shadow:none !important;flex:1;min-width:0;
+}
+.form-field.error .phone-input-group{border-color:#E31A20;box-shadow:0 0 0 3px rgba(227,26,32,.10);}
+.form-note{font-size:11px;color:var(--muted-2);text-align:center;margin:2px 0 0;}
+ footer{background:var(--navy);padding:64px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  .foot-logo-badge{display:inline-flex;background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:16px;}
+  .foot-logo-badge img{height:48px;width:auto;}
+  .foot-grid h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8FD2F2;margin:0 0 16px;}
+  .foot-grid li{margin-bottom:9px;font-size:13.8px;color:var(--on-dark-mid);}
+  .foot-grid li a:hover{color:#fff;}
+  .foot-about p{font-size:13.6px;color:var(--on-dark-mid);max-width:300px;margin:0;}
+  .foot-bottom{border-top:1px solid var(--line-dark);padding-top:22px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;color:var(--on-dark-faint);flex-wrap:wrap;gap:10px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-art{order:-1;}
+    .solutions-grid{grid-template-columns:repeat(2,1fr);}
+    .process-track{grid-template-columns:repeat(3,1fr);row-gap:36px;}
+    .process-line::before{display:none;}
+    .stats-strip{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--line-dark);}
+    .adv-grid{grid-template-columns:repeat(2,1fr);}
+    .industry-row{grid-template-columns:repeat(3,1fr);}
+    .projects-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-grid{grid-template-columns:1fr;}
+    .cta-section{grid-template-columns:1fr;padding:36px;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+  @media (max-width:600px){
+    h1{font-size:36px;}
+    .readout-strip{grid-template-columns:repeat(2,1fr);}
+    .readout:nth-child(2){border-right:none;}
+    .solutions-grid{grid-template-columns:1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    .process-track{grid-template-columns:1fr 1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .status-bar .contact-line{display:none;}
+    section{padding:64px 0;}
+  }
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+}
+</style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header id="site-header" class="header">
   <div class="header-inner">
-    <a href="index2.html" class="brand">
-      <div class="brand-logo"><img src="Assets/Logo.jpeg" alt=""></div>
+    <a href="index.html" class="brand">
+      <div class="brand-logo"><img src="Assets/Logo.png" alt=""></div>
      
     </a>
     <nav class="nav-desktop">
@@ -23,6 +431,7 @@
       <a href="#projects">Projects</a>
       <a href="#industries">Industries</a>
       <a href="#contact">Contact</a>
+      <a href="careers.html">Careers</a>
     </nav>
     <div class="header-cta">
       <a href="#contact" class="btn btn-primary btn-shimmer">Request Consultation</a>
@@ -44,7 +453,7 @@
 <!-- HERO -->
 <section id="hero" class="hero">
   <div class="hero-bg">
-    <img src="https://img.rocket.new/generatedImages/rocket_gen_img_13d22545e-1774691785602.png" alt="Industrial automation assembly line with robotic arms" />
+    <video src="Assets/Herovid.mp4" autoplay muted loop playsinline></video>
     <div class="hero-gradient-1"></div>
     <div class="hero-gradient-2"></div>
     <div class="hero-grain"></div>
@@ -53,12 +462,9 @@
   <div class="hero-spacer"></div>
   <div class="hero-content">
     <div class="hero-inner">
-      <div class="hero-badge">
-        <span class="pulse-dot"><span class="pulse-ping"></span><span class="pulse-core"></span></span>
-        <span>Pune, Maharashtra · Est. 2014</span>
-      </div>
-      <h1 class="hero-title">Built for<br><span class="italic-accent">your line,</span><br>not the shelf.</h1>
-      <p class="hero-desc">Custom automation machines, robotic systems, and conveyor lines — engineered, fabricated, and supported by a team of 86 specialists in Pune.</p>
+      
+      <h1 class="hero-title">Built together,<br><span class="italic-accent">engineered right.</span></h1>
+      <p class="hero-desc">Nakayoshi has designed, built, and commissioned 340+ custom automation machines — by engineers working out of our Gurugram and Gujarat units.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary btn-lg btn-shimmer">
           <span>Start a Project</span>
@@ -68,15 +474,8 @@
       </div>
     </div>
   </div>
-
-  <div class="hero-stats">
-    <div class="hero-stats-inner">
-      <div class="stat-item"><span class="stat-num">99.2%</span><span class="stat-label">Avg Uptime</span></div>
-      <div class="stat-item"><span class="stat-num">340+</span><span class="stat-label">Machines Deployed</span></div>
-      <div class="stat-item"><span class="stat-num">↓38%</span><span class="stat-label">Cycle Time Cut</span></div>
-      <div class="stat-item"><span class="stat-num">27</span><span class="stat-label">Active Lines</span></div>
-    </div>
-  </div>
+</section>
+  
 
   <div class="ticker">
     <div class="ticker-track">
@@ -94,100 +493,74 @@
       <span class="ticker-item">Retrofits<i></i></span>
     </div>
   </div>
-</section>
+
 
 <!-- SOLUTIONS -->
-<section id="solutions" class="section section-bg">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow eyebrow-primary">What We Build</span>
-        <h2 class="section-title">Six core<br><span class="italic-muted">capabilities</span></h2>
+<section id="solutions">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">What We Build</div>
+        <h2>Every machine starts with your part,
+Not a Catalog.</h2>
+        <p>We start with your floor plan, your part, and your target cycle time — then design, build, and prove the machine at rate before it ships.</p>
       </div>
-      <p class="section-note right">From concept to commissioning — every machine is engineered and built in-house at our Pune facility.</p>
+
+      <div class="solutions-grid">
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 20h16M6 20V10l6-6 6 6v10M9 20v-6h6v6"/></svg></div>
+          <h3>Custom Machine Design &amp; Build</h3>
+          <p>From a spec and a floor plan to a running machine — designed, simulated, fabricated, and commissioned by one team.</p>
+          <div class="tag">Mechanical Engineering</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></svg></div>
+          <h3>Robotic Automation Systems</h3>
+          <p>Robotic arm integration for pick-and-place, welding, palletizing, and assembly work, tuned to your cycle time.</p>
+          <div class="tag">Robotics Integration</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 9h4M7 13h7"/></svg></div>
+          <h3>Controls &amp; PLC Programming</h3>
+          <p>PLC, HMI, and SCADA logic that ties your sensors, drives, and safety systems into one control system.</p>
+          <div class="tag">Controls Engineering</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="9" width="20" height="6" rx="2"/><circle cx="6" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></div>
+          <h3>Conveyor &amp; Material Handling</h3>
+          <p>Conveyors, sortation, and accumulation systems engineered to keep product moving without bottlenecks.</p>
+          <div class="tag">Material Flow</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3>Machine Vision &amp; Inspection</h3>
+          <p>Camera-based inspection systems that catch defects and verify assembly before product leaves the line.</p>
+          <div class="tag">Quality Systems</div>
+        </div>
+
+        <div class="sol-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/></svg></div>
+          <h3>Retrofit &amp; Modernization</h3>
+          <p>Upgrade aging equipment with modern controls and safety systems — no full line replacement needed.</p>
+          <div class="tag">Lifecycle Extension</div>
+        </div>
+
+      </div>
     </div>
-
-    <div class="grid grid-3">
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26"/></svg></div>
-          <span class="tag">Mechanical Engineering</span>
-        </div>
-        <h3 class="card-title">Custom Machine Design &amp; Build</h3>
-        <p class="card-desc">End-to-end mechanical design, simulation, and fabrication of special purpose machines tailored to your exact production requirements.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Z"/></svg></div>
-          <span class="tag">Robotics Integration</span>
-        </div>
-        <h3 class="card-title">Robotic Automation Systems</h3>
-        <p class="card-desc">Pick-and-place, assembly, welding, and material handling robots integrated into your existing or new production lines.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"/></svg></div>
-          <span class="tag">Controls Engineering</span>
-        </div>
-        <h3 class="card-title">Controls &amp; PLC Programming</h3>
-        <p class="card-desc">Siemens, Allen-Bradley, and Mitsubishi PLC programming with SCADA dashboards and real-time monitoring interfaces.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193"/></svg></div>
-          <span class="tag">Material Flow</span>
-        </div>
-        <h3 class="card-title">Conveyor &amp; Material Handling</h3>
-        <p class="card-desc">Custom conveyor design for complex routing, pallet systems, accumulation, and ergonomic workstation integration.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178a1.012 1.012 0 0 1 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg></div>
-          <span class="tag">Quality Systems</span>
-        </div>
-        <h3 class="card-title">Machine Vision &amp; Inspection</h3>
-        <p class="card-desc">100% in-line inspection using camera-based vision systems for dimensional checks, label verification, and defect detection.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="card sol-card animate-on-scroll">
-        <div class="scan-line"></div>
-        <div class="card-top">
-          <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182"/></svg></div>
-          <span class="tag">Lifecycle Extension</span>
-        </div>
-        <h3 class="card-title">Retrofit &amp; Modernization</h3>
-        <p class="card-desc">Upgrade aging machines with modern controls, safety systems, and connectivity — without replacing the entire asset.</p>
-        <div class="card-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
+  </section>
 <!-- PROJECTS -->
 <section id="projects" class="section section-dark projects-section">
   <div class="wrap">
     <div class="section-head animate-on-scroll">
       <div>
-        <span class="eyebrow eyebrow-accent">Deployed Projects</span>
+     
         <h2 class="section-title light">Machines we've<br><span class="italic-accent-2">built &amp; delivered</span></h2>
       </div>
-      <p class="section-note right muted-dark">Every project is a bespoke solution — designed, fabricated, and commissioned by our in-house team.</p>
+      <p class="section-note right muted-dark">Every machine was designed, built, and commissioned in-house — by our in-house team.</p>
     </div>
   </div>
 
@@ -245,52 +618,28 @@
 </section>
 
 <!-- PROCESS -->
-<section id="process" class="section section-accent">
-  <div class="wrap">
-    <div class="section-head animate-on-scroll">
-      <div>
-        <span class="eyebrow eyebrow-primary">How We Work</span>
-        <h2 class="section-title">Six steps from<br><span class="italic-muted">brief to running</span></h2>
-      </div>
-      <p class="section-note right">A structured process that eliminates surprises and delivers machines that work from day one.</p>
-    </div>
 
-    <div class="grid grid-3">
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">01</span>
-        <h3 class="step-title">Concept &amp; Feasibility</h3>
-        <p class="card-desc">We study your line, cycle time targets, and constraints to determine the right automation approach.</p>
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">How a Build Runs</div>
+        <h2>Six stages, one engineering team, start to finish.</h2>
+        <p>The same crew that scopes the project is the one standing on your floor during commissioning.</p>
       </div>
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">02</span>
-        <h3 class="step-title">Design &amp; Simulation</h3>
-        <p class="card-desc">3D mechanical design, motion simulation, and layout planning — reviewed and signed off before fabrication begins.</p>
-      </div>
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">03</span>
-        <h3 class="step-title">Fabrication</h3>
-        <p class="card-desc">In-house machining, welding, and assembly at our Pune facility using precision-grade tooling and materials.</p>
-      </div>
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">04</span>
-        <h3 class="step-title">Controls Integration</h3>
-        <p class="card-desc">PLC programming, wiring, HMI development, and safety integration — all done by our controls team.</p>
-      </div>
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">05</span>
-        <h3 class="step-title">Testing &amp; Commissioning</h3>
-        <p class="card-desc">Every machine runs at full production rate in our factory before it ships to your site.</p>
-      </div>
-      <div class="card process-card animate-on-scroll">
-        <span class="step-num">06</span>
-        <h3 class="step-title">Support &amp; Maintenance</h3>
-        <p class="card-desc">On-call engineers, remote diagnostics, and preventive maintenance programs keep your line running.</p>
+      <div class="process-line">
+        <div class="process-track">
+          <div class="process-step"><div class="step-num">01</div><h4>Concept &amp; Feasibility</h4><p>We study your part, your space, and your throughput target before drawing anything.</p></div>
+          <div class="process-step"><div class="step-num">02</div><h4>Design &amp; Simulation</h4><p>3D design and cycle-time simulation catch interference and bottlenecks before steel is cut.</p></div>
+          <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Frames, fixtures, and mechanisms are built and dry-fit in our shop, not on your floor.</p></div>
+          <div class="process-step"><div class="step-num">04</div><h4>Controls Integration</h4><p>PLC, HMI, sensors, and safety circuits are wired, programmed, and bench-tested as one system.</p></div>
+          <div class="process-step"><div class="step-num">05</div><h4>Testing &amp; Commissioning</h4><p>Full run-off at rate, then on-site install, alignment, and operator handover.</p></div>
+          <div class="process-step"><div class="step-num">06</div><h4>Support &amp; Maintenance</h4><p>Spares, remote diagnostics, and scheduled service keep the line running for years.</p></div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- INDUSTRIES --
+  </section>
+<!---
+ INDUSTRIES 
 <section id="industries" class="section">
   <div class="wrap">
     <div class="stats-panel animate-on-scroll">
@@ -344,10 +693,10 @@
     </div>
   </div>
 </section>
- -->
+-->
 <!-- TESTIMONIALS -->
-<section id="testimonials" class="section section-accent-2">
-  <div class="wrap">
+<section id="testimonials" class="section2 section-accent-2">
+  <div class="wrap2">
     <div class="animate-on-scroll" style="text-align:center;margin-bottom:3.5rem;">
       <span class="eyebrow eyebrow-primary">Client Feedback</span>
       <h2 class="section-title">What plant managers<br><span class="italic-muted">actually say</span></h2>
@@ -383,7 +732,7 @@
 
 <!-- CONTACT -->
 <section id="contact" class="section section-dark">
-  <div class="wrap">
+  <div class="wrap2">
     <div class="grid grid-2 contact-grid">
       <div class="contact-info animate-on-scroll">
         <div>
@@ -402,7 +751,11 @@
           </a>
           <div class="contact-link">
             <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg></span>
-            <span><span class="contact-label">Location</span><span class="contact-value">MIDC Industrial Area, Pune 411019</span></span>
+            <span><span class="contact-label">Location</span><span class="contact-value">Sector-102,Gurugram 122001
+            </br>
+          </br>
+         Aarnav, Bahucharaji Highway, Naviyani, Gujarat 363750
+            </span></span>
           </div>
         </div>
         <div class="quote-box">
@@ -412,7 +765,7 @@
       </div>
 
       <div class="form-card animate-on-scroll">
-        <form id="contact-form">
+        <form id="contact-form" novalidate>
           <h3 class="form-title">Request a Consultation</h3>
           <div class="form-row">
             <div class="form-field">
@@ -425,13 +778,18 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-field">
+            <div class="form-field" id="email-field">
               <label>Email *</label>
-              <input type="email" name="email" required placeholder="r.sharma@company.com">
+              <input type="email" name="email" id="email-input" required placeholder="rajesh@gmail.com" autocomplete="email">
+              <span class="field-error" id="email-error">Please enter a valid email address.</span>
             </div>
-            <div class="form-field">
-              <label>Phone</label>
-              <input type="tel" name="phone" placeholder="+91 98765 43210">
+            <div class="form-field" id="phone-field">
+              <label>Phone *</label>
+              <div class="phone-input-group">
+                <span class="phone-cc">🇮🇳 +91</span>
+                <input type="tel" name="phone" id="phone-input" required placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel-national">
+              </div>
+              <span class="field-error" id="phone-error">Enter a valid 10-digit mobile number.</span>
             </div>
           </div>
           <div class="form-field">
@@ -468,7 +826,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-about">
-        <div class="foot-logo-badge"><img src="Assets/logo.jpeg" alt="Nakayoshi India Pvt. Ltd."></div>
+        <div class="foot-logo-badge"><img src="Assets/Logo.png" alt="Nakayoshi India Pvt. Ltd."></div>
         <p>Nakayoshi India Pvt. Ltd. designs and builds custom automation systems and production machinery for manufacturers across India — from concept through commissioning and long-term support.</p>
       </div>
       <div>
@@ -494,7 +852,8 @@
         <h5>Contact</h5>
         <ul>
           <li>Nakayoshi India Pvt. Ltd.</li>
-          <li>MIDC Industrial Area, Pune,<br>Maharashtra 411019, India</li>
+          <li>Sector-102, Gurugram,Haryana 122001</li>
+          <li>Aarnav, Bahucharaji Highway,  Naviyani, Gujarat 363750</li>
           <li>+91 98220 47711</li>
           <li>engineering@nakayoshi.tech</li>
         </ul>
@@ -544,15 +903,107 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => observer.observe(el));
 
-  /* Contact form submit (demo only — no backend) */
+  /* ---------- Contact form validation + submit ---------- */
   const form = document.getElementById('contact-form');
-  form.addEventListener('submit', (e) => {
+  const emailField = document.getElementById('email-field');
+  const emailInput = document.getElementById('email-input');
+  const emailError = document.getElementById('email-error');
+  const phoneField = document.getElementById('phone-field');
+  const phoneInput = document.getElementById('phone-input');
+  const phoneError = document.getElementById('phone-error');
+
+  // Only allow digits in the phone field, capped at 10 digits
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    clearError(phoneField);
+  });
+  phoneInput.addEventListener('paste', (e) => {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"] span');
-    const original = btn.textContent;
-    btn.textContent = 'Thank you — we\'ll be in touch!';
-    form.reset();
-    setTimeout(() => { btn.textContent = original; }, 3000);
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    const digits = pasted.replace(/\D/g, '').slice(0, 10);
+    phoneInput.value = digits;
+    clearError(phoneField);
+  });
+
+  emailInput.addEventListener('input', () => clearError(emailField));
+
+  function clearError(fieldEl){
+    fieldEl.classList.remove('error');
+  }
+  function showError(fieldEl){
+    fieldEl.classList.add('error');
+  }
+
+  // Must be a proper, valid @gmail.com address (e.g. name123@gmail.com)
+  function isValidGmail(value){
+    const gmailPattern = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]{0,63})@gmail\.com$/;
+    return gmailPattern.test(value.trim().toLowerCase());
+  }
+
+  // Must be exactly 10 digits, no more, no less, and start 6-9 (valid Indian mobile)
+  function isValidPhone(value){
+    return /^[6-9]\d{9}$/.test(value.trim());
+  }
+
+  function validateForm(){
+    let valid = true;
+
+    if (!isValidGmail(emailInput.value)) {
+      showError(emailField);
+      valid = false;
+    } else {
+      clearError(emailField);
+    }
+
+    if (!isValidPhone(phoneInput.value)) {
+      showError(phoneField);
+      valid = false;
+    } else {
+      clearError(phoneField);
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      const firstError = form.querySelector('.form-field.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const btnText = btn.querySelector('span');
+    const original = btnText.textContent;
+
+    btn.disabled = true;
+    btnText.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(form);
+      // send phone with country code prefix
+      formData.set('phone', '+91' + phoneInput.value);
+
+      const res = await fetch('send-mail.php', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        btnText.textContent = "Thank you — we'll be in touch!";
+        form.reset();
+      } else {
+        btnText.textContent = data.message || 'Something went wrong. Try again.';
+      }
+    } catch (err) {
+      btnText.textContent = 'Network error. Please try again.';
+    } finally {
+      btn.disabled = false;
+      setTimeout(() => { btnText.textContent = original; }, 3500);
+    }
   });
 
 });

@@ -269,13 +269,21 @@ input,select,textarea{font-family:inherit;}
 .projects-note{color:rgba(244,243,239,.35);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-top:1.2rem;}
 
 /* ============ PROCESS ============ */
-  .process-list{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1px solid var(--line);}
-  .process-step{padding:26px 18px 0;border-right:1px solid var(--line);position:relative;}
-  .process-step:last-child{border-right:none;}
-  .process-step .step-num{font-family:var(--font-mono);font-size:13px;color:var(--red);margin-bottom:14px;font-weight:600;}
-  .process-step h4{font-family:var(--font-display);font-size:15.5px;margin:0 0 8px;font-weight:600;color:var(--navy);}
-  .process-step p{font-size:13.2px;color:var(--text-mid);margin:0;}
-  .process-step::before{content:"";position:absolute;top:0;left:0;width:34px;height:2px;background:var(--blue);}
+  .process-line{position:relative;padding-top:8px;color:black;}
+  .process-line::before{
+    content:"";position:absolute;top:25px;left:0;right:0;height:1px;
+    background:black;z-index:0;
+  }
+  .process-track{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;position:relative;z-index:1;}
+  .process-step{display:flex;flex-direction:column;align-items:flex-start;padding:0 4px 0 0;}
+  .process-step .step-num{
+    width:50px;height:50px;border-radius:50%;background:#008dd2;color:#fff;
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;flex-shrink:0;
+    font-family:var(--font-mono);font-size:14px;font-weight:600;
+    box-shadow:0 0 0 6px var(--bg);
+  }
+  .process-step h4{font-family:var(--font-display);font-size:15.5px;margin:0 0 8px;font-weight:600;color:#e15516;}
+  .process-step p{font-size:15.2px;color:black;margin:0;line-height:1.55;}
 
 /* ============ INDUSTRIES ============ */
 .stats-panel{background:var(--secondary);border-radius:26px;padding:2.6rem 2rem;margin-bottom:3.5rem;}
@@ -318,7 +326,7 @@ input,select,textarea{font-family:inherit;}
 .contact-links{display:flex;flex-direction:column;gap:1.1rem;}
 .contact-link{display:flex;align-items:center;gap:14px;}
 .contact-icon{
-  width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  width:38px;height:50px;border-radius:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;
 }
 .contact-icon svg{width:16px;height:16px;color:var(--accent);}
@@ -609,21 +617,22 @@ Not a Catalog.</h2>
 </section>
 
 <!-- PROCESS -->
-
   <section id="process">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-eyebrow">How a Build Runs</div>
+
         <h2>Six stages, one engineering team, start to finish.</h2>
-        <p>The same crew that scopes the project is the one standing on your floor during commissioning.</p>
+       
       </div>
-      <div class="process-list">
-        <div class="process-step"><div class="step-num">01</div><h4>Concept &amp; Feasibility</h4><p>We study your part, your space, and your throughput target before drawing anything.</p></div>
-        <div class="process-step"><div class="step-num">02</div><h4>Design &amp; Simulation</h4><p>3D design and cycle-time simulation catch interference and bottlenecks before steel is cut.</p></div>
-        <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Frames, fixtures, and mechanisms are built and dry-fit in our shop, not on your floor.</p></div>
-        <div class="process-step"><div class="step-num">04</div><h4>Controls Integration</h4><p>PLC, HMI, sensors, and safety circuits are wired, programmed, and bench-tested as one system.</p></div>
-        <div class="process-step"><div class="step-num">05</div><h4>Testing &amp; Commissioning</h4><p>Full run-off at rate, then on-site install, alignment, and operator handover.</p></div>
-        <div class="process-step"><div class="step-num">06</div><h4>Support &amp; Maintenance</h4><p>Spares, remote diagnostics, and scheduled service keep the line running for years.</p></div>
+      <div class="process-line">
+        <div class="process-track">
+          <div class="process-step"><div class="step-num">01</div><h4>Concept &amp; Feasibility</h4><p>We study your part, your space, and your throughput target before drawing anything.</p></div>
+          <div class="process-step"><div class="step-num">02</div><h4>Design &amp; Simulation</h4><p>3D design and cycle-time simulation catch interference and bottlenecks before steel is cut.</p></div>
+          <div class="process-step"><div class="step-num">03</div><h4>Fabrication</h4><p>Frames, fixtures, and mechanisms are built and dry-fit in our shop, not on your floor.</p></div>
+          <div class="process-step"><div class="step-num">04</div><h4>Controls Integration</h4><p>PLC, HMI, sensors, and safety circuits are wired, programmed, and bench-tested as one system.</p></div>
+          <div class="process-step"><div class="step-num">05</div><h4>Testing &amp; Commissioning</h4><p>Full run-off at rate, then on-site install, alignment, and operator handover.</p></div>
+          <div class="process-step"><div class="step-num">06</div><h4>Support &amp; Maintenance</h4><p>Spares, remote diagnostics, and scheduled service keep the line running for years.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -738,14 +747,25 @@ Not a Catalog.</h2>
             <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg></span>
             <span><span class="contact-label">Email</span><span class="contact-value">engineering@nakayoshi.tech</span></span>
           </a>
+           <a href="https://maps.app.goo.gl/a6r82aFq2qUEvBwC9" target="_blank" class="contact-link">
+            
           <div class="contact-link">
             <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg></span>
-            <span><span class="contact-label">Location</span><span class="contact-value">Sector-102,Gurugram 122001
-            </br>
-          </br>
+            <span><span class="contact-label">Location</span><span class="contact-value">Sector-102, Gurugram, Haryana 122001
+            
+            </span></span>
+          </div>
+           </a>
+
+          <a href="https://maps.app.goo.gl/hm9XKbzHAXEpH2z58" target="_blank" class="contact-link">
+            
+           <div class="contact-link">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg></span>
+            <span><span class="contact-label">Location</span><span class="contact-value">
          Aarnav, Bahucharaji Highway, Naviyani, Gujarat 363750
             </span></span>
           </div>
+          </a>
         </div>
         <div class="quote-box">
           <p class="quote-text">"Join Hands For Innovative Solutions"</p>
