@@ -248,25 +248,33 @@ input,select,textarea{font-family:inherit;}
 
 /* ============ PROJECTS ============ */
 .projects-section{padding-bottom:4rem;}
-.projects-scroll{
-  display:flex;gap:20px;overflow-x:auto;padding:6px 24px 16px;scroll-snap-type:x mandatory;
+.projects-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:6px 24px 16px;
 }
-.projects-scroll::-webkit-scrollbar{height:6px;}
-.projects-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:8px;}
 .project-card{
-  position:relative;flex-shrink:0;width:78vw;max-width:400px;aspect-ratio:4/3;
-  border-radius:22px;overflow:hidden;scroll-snap-align:start;cursor:pointer;
+  position:relative;aspect-ratio:4/3;
+  border-radius:18px;overflow:hidden;cursor:pointer;
 }
 .project-card img{width:100%;height:100%;object-fit:cover;transition:filter .7s ease, transform .7s ease;}
 .project-card:hover img{filter:grayscale(0);transform:scale(1.05);}
-.project-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.15) 55%, transparent);}
-.project-info{position:absolute;left:0;right:0;bottom:0;padding:22px;transform:translateY(6px);transition:transform .5s;}
-.project-card:hover .project-info{transform:translateY(0);}
-.project-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.project-info{
+  position:absolute;left:0;right:0;bottom:0;padding:14px 16px;
+  background:rgba(10,10,10,.38);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.project-meta{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
 .tag-primary{color:var(--primary);background:rgba(225,85,22,.22);backdrop-filter:blur(4px);}
 .dim{font-size:10px;color:rgba(255,255,255,.55);font-weight:500;}
-.project-info h3{font-family:var(--font-display);font-size:1.2rem;color:#fff;font-weight:600;margin:0;letter-spacing:-0.01em;}
+.project-info h3{font-family:var(--font-display);font-size:1.05rem;color:#fff;font-weight:600;margin:0;letter-spacing:-0.01em;}
 .projects-note{color:rgba(244,243,239,.35);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-top:1.2rem;}
+
+@media (max-width:900px){
+  .projects-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:560px){
+  .projects-grid{grid-template-columns:1fr;}
+}
 
 /* ============ LIGHTBOX ============ */
 .lightbox-overlay{
@@ -591,10 +599,10 @@ Not a Catalog.</h2>
     </div>
   </div>
 
-  <div class="projects-scroll">
+  <div class="wrap">
+  <div class="projects-grid">
     <div class="project-card">
       <img src="Assets/machines/Valeo.jpeg" alt="Fender Assembly Line" loading="lazy">
-      
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Chennai</span></div>
         <h3>Fender Assembly Line</h3>
@@ -602,7 +610,6 @@ Not a Catalog.</h2>
     </div>
     <div class="project-card">
       <img src="Assets/machines/Engine_assembly.jpeg" alt="Engine Assembly LTM" loading="lazy">
-      >
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Gurugram</span></div>
         <h3>Engine Assembly LTM</h3>
@@ -610,7 +617,6 @@ Not a Catalog.</h2>
     </div>
     <div class="project-card">
       <img src="Assets/machines/OilandTAplate.jpeg" alt="Oil and TA Plate LTM" loading="lazy">
-     
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Chennai</span></div>
         <h3>Oil and TA Plate LTM</h3>
@@ -618,7 +624,6 @@ Not a Catalog.</h2>
     </div>
     <div class="project-card">
       <img src="Assets/machines/coolingelemnt.jpeg" alt="Cooling Element LTM" loading="lazy">
-   
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Gurugram</span></div>
         <h3>Cooling Element LTM</h3>
@@ -626,7 +631,6 @@ Not a Catalog.</h2>
     </div>
     <div class="project-card">
       <img src="Assets/machines/Servopress.jpeg" alt="Servo Press Machine" loading="lazy">
-  
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Gurugram</span></div>
         <h3>Servo Press Machine</h3>
@@ -634,12 +638,12 @@ Not a Catalog.</h2>
     </div>
     <div class="project-card">
       <img src="Assets/machines/ZipInspection.jpeg" alt="Zip Inspection Machine" loading="lazy">
-     
       <div class="project-info">
         <div class="project-meta"><span class="tag tag-primary">Automotive</span><span class="dim">· Gurugram</span></div>
         <h3>Zip Inspection Machine</h3>
       </div>
     </div>
+  </div>
   </div>
   <div class="wrap"><p class="projects-note">Showing 6 of 340+ machines deployed across India</p></div>
 </section>
@@ -947,55 +951,8 @@ Not a Catalog.</h2>
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => observer.observe(el));
 
-  /* ---------- Hover pe project card ko center me scroll karo ---------- */
- /* ---------- Hover pe project card ko center me slow scroll karo ---------- */
-  const projectsScroll = document.querySelector('.projects-scroll');
-  const projectCards = projectsScroll ? projectsScroll.querySelectorAll('.project-card') : [];
-
-  let hoverTimer = null;
-  let scrollAnimFrame = null;
-
-  // Custom smooth scroll — duration control ke liye (native scrollTo ki speed set nahi hoti)
-  function smoothScrollTo(container, targetLeft, duration = 900) {
-    if (scrollAnimFrame) cancelAnimationFrame(scrollAnimFrame);
-
-    const startLeft = container.scrollLeft;
-    const distance = targetLeft - startLeft;
-    const startTime = performance.now();
-
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    function step(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      container.scrollLeft = startLeft + distance * easeInOutCubic(progress);
-
-      if (progress < 1) {
-        scrollAnimFrame = requestAnimationFrame(step);
-      }
-    }
-    scrollAnimFrame = requestAnimationFrame(step);
-  }
-
-  projectCards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      clearTimeout(hoverTimer);
-      // Thoda ruk ke trigger hoga — taaki mouse fast move karne pe baar-baar scroll na ho
-      hoverTimer = setTimeout(() => {
-        const targetScroll =
-          card.offsetLeft - (projectsScroll.clientWidth / 2) + (card.clientWidth / 2);
-        smoothScrollTo(projectsScroll, targetScroll, 900); // 900ms = slow smooth scroll
-      }, 180); // 180ms hover-intent delay
-    });
-
-    card.addEventListener('mouseleave', () => {
-      clearTimeout(hoverTimer);
-    });
-  });
-  
   /* ---------- Click pe image lightbox me badi dikhao ---------- */
+  const projectCards = document.querySelectorAll('.projects-grid .project-card');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
