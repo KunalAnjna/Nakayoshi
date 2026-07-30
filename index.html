@@ -268,6 +268,34 @@ input,select,textarea{font-family:inherit;}
 .project-info h3{font-family:var(--font-display);font-size:1.2rem;color:#fff;font-weight:600;margin:0;letter-spacing:-0.01em;}
 .projects-note{color:rgba(244,243,239,.35);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-top:1.2rem;}
 
+/* ============ LIGHTBOX ============ */
+.lightbox-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:rgba(10,10,10,.92);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;visibility:hidden;
+  transition:opacity .3s ease, visibility .3s ease;
+}
+.lightbox-overlay.open{opacity:1;visibility:visible;}
+.lightbox-overlay img{
+  max-width:90vw;max-height:85vh;
+  border-radius:14px;
+  transform:scale(.92);
+  transition:transform .35s ease;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+}
+.lightbox-overlay.open img{transform:scale(1);}
+.lightbox-close{
+  position:absolute;top:24px;right:28px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;cursor:pointer;transition:background .25s;
+}
+.lightbox-close:hover{background:rgba(255,255,255,.2);}
+.lightbox-close svg{width:20px;height:20px;}
+
 /* ============ PROCESS ============ */
   .process-line{position:relative;padding-top:8px;color:black;}
   .process-line::before{
@@ -875,6 +903,13 @@ Not a Catalog.</h2>
   </div>
 </footer>
 
+<!-- LIGHTBOX (image click se khulega) -->
+<div id="lightbox" class="lightbox-overlay">
+  <button id="lightbox-close" class="lightbox-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <script >document.addEventListener('DOMContentLoaded', () => {
 
@@ -911,6 +946,84 @@ Not a Catalog.</h2>
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   revealEls.forEach(el => observer.observe(el));
+
+  /* ---------- Hover pe project card ko center me scroll karo ---------- */
+ /* ---------- Hover pe project card ko center me slow scroll karo ---------- */
+  const projectsScroll = document.querySelector('.projects-scroll');
+  const projectCards = projectsScroll ? projectsScroll.querySelectorAll('.project-card') : [];
+
+  let hoverTimer = null;
+  let scrollAnimFrame = null;
+
+  // Custom smooth scroll — duration control ke liye (native scrollTo ki speed set nahi hoti)
+  function smoothScrollTo(container, targetLeft, duration = 900) {
+    if (scrollAnimFrame) cancelAnimationFrame(scrollAnimFrame);
+
+    const startLeft = container.scrollLeft;
+    const distance = targetLeft - startLeft;
+    const startTime = performance.now();
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      container.scrollLeft = startLeft + distance * easeInOutCubic(progress);
+
+      if (progress < 1) {
+        scrollAnimFrame = requestAnimationFrame(step);
+      }
+    }
+    scrollAnimFrame = requestAnimationFrame(step);
+  }
+
+  projectCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      clearTimeout(hoverTimer);
+      // Thoda ruk ke trigger hoga — taaki mouse fast move karne pe baar-baar scroll na ho
+      hoverTimer = setTimeout(() => {
+        const targetScroll =
+          card.offsetLeft - (projectsScroll.clientWidth / 2) + (card.clientWidth / 2);
+        smoothScrollTo(projectsScroll, targetScroll, 900); // 900ms = slow smooth scroll
+      }, 180); // 180ms hover-intent delay
+    });
+
+    card.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimer);
+    });
+  });
+  
+  /* ---------- Click pe image lightbox me badi dikhao ---------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt){
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  projectCards.forEach(card => {
+    const img = card.querySelector('img');
+    if (!img) return;
+    card.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
 
   /* ---------- Contact form validation + submit ---------- */
   const form = document.getElementById('contact-form');
