@@ -152,16 +152,69 @@ input,select,textarea{font-family:inherit;}
 .nav-desktop a:hover::after{width:100%;}
 
 .header-cta{display:flex;}
-.menu-toggle{display:none;background:none;border:none;padding:6px;color:var(--fg);}
-.header:not(.scrolled) .menu-toggle{color:#fff;}
-.menu-toggle svg{width:26px;height:26px;}
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+    color:#000;
+}
+
+.menu-toggle svg{
+    width:30px;
+    height:30px;
+}
 
 .nav-mobile{
-  display:none;flex-direction:column;gap:4px;padding:14px 24px 20px;
-  background:var(--bg);border-top:1px solid var(--border);
+    position:absolute;
+    top:70px;
+    left:0;
+    width:100%;
+    background:#fff;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    max-height:0;
+    transition:max-height .35s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    border-top:1px solid #eee;
+    z-index:999;
 }
-.nav-mobile a{padding:10px 4px;font-size:15px;font-weight:500;color:var(--fg);}
-.nav-mobile.open{display:flex;}
+
+.nav-mobile.open{
+    max-height:500px;
+}
+
+.nav-mobile a{
+    padding:16px 24px;
+    border-bottom:1px solid #eee;
+    color:#000;
+    font-size:16px;
+}
+
+@media (max-width:991px){
+
+    .nav-desktop,
+    .header-cta{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+}
+
+@media (min-width:992px){
+
+    .nav-mobile{
+        display:none !important;
+    }
+
+}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
@@ -477,6 +530,253 @@ input,select,textarea{font-family:inherit;}
   .filter-band{position:static;}
   .page-hero{padding:120px 0 44px;}
 }
+/* ===========================
+   LARGE DESKTOP (1600px+)
+=========================== */
+@media (min-width:1600px){
+
+    .wrap,
+    .wrap2,
+    .header-inner{
+        max-width:1500px;
+    }
+
+    .hero-title{
+        font-size:5rem;
+    }
+
+    .projects-page-grid{
+        grid-template-columns:repeat(4,1fr);
+        gap:28px;
+    }
+}
+
+
+/* ===========================
+   LAPTOP (1366px - 1599px)
+=========================== */
+@media (max-width:1599px){
+
+    .wrap,
+    .wrap2,
+    .header-inner{
+        max-width:1280px;
+    }
+
+    .nav-desktop{
+        gap:22px;
+    }
+
+    .nav-desktop a{
+        font-size:18px;
+    }
+
+    .hero-title{
+        font-size:4rem;
+    }
+}
+
+
+/* ===========================
+   SMALL LAPTOP (1024px-1365px)
+=========================== */
+@media (max-width:1365px){
+
+    .header-inner{
+        padding:0 18px;
+    }
+
+    .nav-desktop{
+        gap:16px;
+    }
+
+    .nav-desktop a{
+        font-size:16px;
+    }
+
+    .btn{
+        padding:11px 18px;
+        font-size:13px;
+    }
+
+    .hero-title{
+        font-size:3.5rem;
+    }
+
+    .hero-desc{
+        font-size:16px;
+    }
+
+    .projects-page-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .foot-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+
+/* ===========================
+   TABLET
+=========================== */
+@media (max-width:991px){
+
+    .nav-desktop,
+    .header-cta{
+        display:none;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .header-inner{
+        height:70px;
+    }
+
+    .brand-logo{
+        width:90px;
+        height:auto;
+    }
+
+    .hero-title{
+        font-size:2.8rem;
+    }
+
+    .hero-desc{
+        font-size:15px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+    }
+
+    .hero-actions .btn{
+        width:100%;
+    }
+
+    .hero-stats-inner{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .projects-page-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .foot-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width:767px){
+
+    .wrap,
+    .wrap2{
+        padding:0 16px;
+    }
+
+    .page-hero{
+        padding:110px 0 50px;
+    }
+
+    .page-hero h1{
+        font-size:2rem;
+    }
+
+    .page-hero p{
+        font-size:14px;
+    }
+
+    .hero-title{
+        font-size:2.2rem;
+        line-height:1.1;
+    }
+
+    .hero-desc{
+        font-size:14px;
+    }
+
+    .hero-stats-inner{
+        grid-template-columns:1fr;
+    }
+
+    .stat-item{
+        border-right:none;
+        border-bottom:1px solid rgba(255,255,255,.12);
+        padding:18px 0;
+    }
+
+    .stat-item:last-child{
+        border-bottom:none;
+    }
+
+    .projects-page-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project-card{
+        aspect-ratio:16/10;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .foot-grid{
+        grid-template-columns:1fr;
+        gap:28px;
+    }
+
+    .foot-bottom{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+@media (max-width:480px){
+
+    .hero-title{
+        font-size:1.8rem;
+    }
+
+    .section-title{
+        font-size:1.8rem;
+    }
+
+    h2{
+        font-size:28px;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .project-info h3{
+        font-size:15px;
+    }
+
+    .project-meta{
+        flex-wrap:wrap;
+    }
+
+}
+
+
+
+
+
+
 </style>
 </head>
 
@@ -501,8 +801,16 @@ input,select,textarea{font-family:inherit;}
       <a href="index.html#contact" class="btn btn-primary btn-shimmer">Request Consultation</a>
     </div>
     <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-    </button>
+    <svg id="menu-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 6h18M3 12h18M3 18h18"/>
+    </svg>
+</button>
   </div>
   <nav id="nav-mobile" class="nav-mobile">
     <a href="index.html#solutions">Solutions</a>
@@ -756,15 +1064,47 @@ input,select,textarea{font-family:inherit;}
 document.addEventListener('DOMContentLoaded', () => {
 
   /* Mobile menu toggle */
-  const menuToggle = document.getElementById('menu-toggle');
-  const navMobile = document.getElementById('nav-mobile');
-  menuToggle.addEventListener('click', () => {
-    navMobile.classList.toggle('open');
-  });
-  navMobile.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navMobile.classList.remove('open'));
-  });
+  /* Mobile menu toggle */
+const menuToggle = document.getElementById("menu-toggle");
+const navMobile = document.getElementById("nav-mobile");
+const menuIcon = document.getElementById("menu-icon");
 
+menuToggle.addEventListener("click", () => {
+
+    navMobile.classList.toggle("open");
+
+    if(navMobile.classList.contains("open")){
+
+        menuIcon.innerHTML = `
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M18 6L6 18M6 6l12 12"/>`;
+
+    }else{
+
+        menuIcon.innerHTML = `
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 6h18M3 12h18M3 18h18"/>`;
+
+    }
+
+});
+
+navMobile.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMobile.classList.remove("open");
+
+        menuIcon.innerHTML = `
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 6h18M3 12h18M3 18h18"/>`;
+
+    });
+
+});
   /* Filter chips */
   const chips = document.querySelectorAll('.filter-chip');
   const cards = document.querySelectorAll('#projectsGrid .project-card');
