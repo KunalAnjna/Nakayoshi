@@ -490,36 +490,142 @@ section {
 }
 
 
-  /* ---------- responsive ---------- */
-  @media (max-width:980px){
-    .hero .wrap{grid-template-columns:1fr;}
-    .hero-art{order:-1;}
-    .solutions-grid{grid-template-columns:repeat(2,1fr);}
-    .process-list{grid-template-columns:repeat(3,1fr);}
-    .process-step{border-bottom:1px solid var(--line);padding-bottom:22px;}
-    .stats-strip{grid-template-columns:repeat(2,1fr);}
-    .stat{border-bottom:1px solid var(--line-dark);}
-    .adv-grid{grid-template-columns:repeat(2,1fr);}
-    .industry-row{grid-template-columns:repeat(3,1fr);}
-    .projects-grid{grid-template-columns:repeat(2,1fr);}
-    .testi-grid{grid-template-columns:1fr;}
-    .cta-section{grid-template-columns:1fr;padding:36px;}
-    .foot-grid{grid-template-columns:1fr 1fr;}
-    .nav-links{display:none;}
-    .burger{display:flex;}
+  /* ==================================================================
+     RESPONSIVE BREAKPOINTS
+     Mobile:            up to 575px
+     Large mobile:      576px – 767px
+     Tablet:            768px – 991px
+     Small laptop:      992px – 1199px
+     Laptop / desktop:  1200px – 1439px  (default / base styles above)
+     Large screens:     1440px and up
+     ================================================================== */
+
+  /* ---------- 1440px and up: large / big screens ---------- */
+  @media (min-width:1440px){
+    :root{ --wrap:1360px; }
+    .hero-title{font-size:clamp(3.4rem,5.5vw,5.4rem);}
+    .hero-desc{font-size:1.3rem;}
+    .solutions-grid{gap:26px;}
+    .projects-grid{gap:24px;}
+    section{padding:110px 0;}
   }
-  @media (max-width:600px){
-    h1{font-size:36px;}
-    .readout-strip{grid-template-columns:repeat(2,1fr);}
-    .readout:nth-child(2){border-right:none;}
+
+  /* ---------- 1200px – 1439px: standard laptop / desktop ---------- */
+  @media (max-width:1439px){
+    :root{ --wrap:1140px; }
+  }
+
+  /* ---------- 992px – 1199px: small laptop ---------- */
+  @media (max-width:1199px){
+    :root{ --wrap:960px; }
+    .hero-title{font-size:clamp(2.4rem,6vw,3.8rem);}
+    section{padding:84px 0;}
+    .solutions-grid{gap:18px;}
+    .sol-card{padding:24px 20px;}
+    .process-track{gap:14px;}
+    .process-step h4{font-size:14.5px;}
+    .process-step p{font-size:13.8px;}
+    .stats-panel-grid{gap:1.2rem;}
+    .foot-grid{grid-template-columns:1.2fr 1fr 1fr 1fr;gap:28px;}
+  }
+
+  /* ---------- 768px – 991px: tablets ---------- */
+  @media (max-width:991px){
+    :root{ --wrap:720px; }
+    section{padding:72px 0;}
+
+    .hero{min-height:auto;padding-bottom:0;}
+    .hero-title{font-size:clamp(2.4rem,7vw,3.4rem);}
+    .hero-desc{font-size:1.05rem;max-width:100%;}
+    .hero-actions{width:100%;}
+    .hero-actions .btn{flex:1 1 auto;justify-content:center;}
+
+    .hero-stats-inner{grid-template-columns:repeat(2,1fr);row-gap:16px;}
+    .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px;}
+    .stat-item:nth-child(2n){border-right:none;}
+    .stat-item:nth-last-child(-n+2){border-bottom:none;}
+
+    .solutions-grid{grid-template-columns:repeat(2,1fr);}
+
+    .section-head{flex-direction:column;align-items:flex-start;}
+    .section-note.right{text-align:left;}
+
+    .process-track{grid-template-columns:repeat(3,1fr);row-gap:32px;}
+    .process-line::before{display:none;}
+
+    .stats-panel-grid{grid-template-columns:repeat(2,1fr);row-gap:1.6rem;}
+
+    .grid-2.industries-grid{grid-template-columns:1fr;gap:36px;}
+    .grid-2.contact-grid{grid-template-columns:1fr;gap:36px;}
+
+    .grid-3{grid-template-columns:repeat(2,1fr);}
+
+    .foot-grid{grid-template-columns:1fr 1fr;row-gap:32px;}
+  }
+
+  /* ---------- 576px – 767px: large phones / small tablets ---------- */
+  @media (max-width:767px){
+    :root{ --wrap:100%; }
+    .wrap,.wrap2{padding:0 20px;}
+    section{padding:60px 0;}
+
+    h2{font-size:28px;}
+    .section-title{font-size:clamp(1.7rem,7vw,2.2rem);}
+
+    .hero-content{padding:1.5rem 20px;}
+    .hero-title{font-size:clamp(2.1rem,9vw,2.8rem);}
+    .hero-desc{font-size:1rem;}
+    .hero-actions{flex-direction:column;}
+    .hero-actions .btn{width:100%;}
+
     .solutions-grid{grid-template-columns:1fr;}
     .projects-grid{grid-template-columns:1fr;}
-    .process-list{grid-template-columns:1fr 1fr;}
-    .field-row{grid-template-columns:1fr;}
-    .foot-grid{grid-template-columns:1fr;}
-    .status-bar .contact-line{display:none;}
-    section{padding:64px 0;}
+
+    .process-track{grid-template-columns:repeat(2,1fr);row-gap:28px;}
+
+    .stats-panel{padding:2rem 1.4rem;}
+    .stats-panel-grid{grid-template-columns:repeat(2,1fr);}
+
+    .grid-3{grid-template-columns:1fr;}
+
+    .form-row{grid-template-columns:1fr;}
+
+    .foot-grid{grid-template-columns:1fr;gap:30px;}
+    .foot-bottom{flex-direction:column;text-align:center;}
   }
+
+  /* ---------- up to 575px: mobile phones ---------- */
+  @media (max-width:575px){
+    section{padding:48px 0;}
+    .wrap,.wrap2{padding:0 16px;}
+
+    h2{font-size:24px;}
+    .hero-title{font-size:clamp(1.9rem,10vw,2.4rem);line-height:1.05;}
+    .hero-desc{font-size:.95rem;}
+    .hero-badge{font-size:10px;padding:6px 12px;}
+
+    .hero-stats-inner{grid-template-columns:1fr 1fr;padding:16px 16px;}
+    .stat-num{font-size:1.15rem;}
+    .stat-label{font-size:9.5px;}
+
+    .ticker-item{font-size:11px;padding:0 20px;}
+
+    .process-track{grid-template-columns:1fr;row-gap:24px;}
+    .process-step .step-num{width:42px;height:42px;font-size:12.5px;}
+
+    .stats-panel-grid{grid-template-columns:1fr 1fr;gap:1rem;}
+    .stat-item .stat-num{font-size:1.1rem;}
+
+    .testi-card{padding:22px;}
+
+    .form-card{padding:1.4rem;}
+    .contact-icon{width:34px;height:44px;}
+
+    .cta-band h2{font-size:22px;}
+
+    .foot-logo-badge img{height:38px;}
+  }
+
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
 }
@@ -564,6 +670,7 @@ section {
     <a href="#projects">Projects</a>
     <a href="#industries">Industries</a>
     <a href="#contact">Contact</a>
+    <a href="#careers">Careers</a>
     <a href="#contact" class="btn btn-primary btn-shimmer" style="text-align:center;margin-top:8px;">Request Consultation</a>
   </nav>
 </header>
@@ -1220,13 +1327,6 @@ navMobile.querySelectorAll("a").forEach(link => {
   });
 
 });
-</script>
-<script>
-const menuToggle=document.getElementById("menu-toggle");
-const navMobile=document.getElementById("nav-mobile");
-if(menuToggle&&navMobile){
- menuToggle.addEventListener("click",()=>navMobile.classList.toggle("open"));
-}
 </script>
 </body>
 </html>

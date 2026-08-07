@@ -156,16 +156,42 @@ p{
 .nav-desktop a:hover::after{width:100%;}
 
 .header-cta{display:flex;}
-.menu-toggle{display:none;background:none;border:none;padding:6px;color:var(--fg);}
-.header:not(.scrolled) .menu-toggle{color:#fff;}
-.menu-toggle svg{width:26px;height:26px;}
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+    color:#000;
+}
+.menu-toggle svg{width:28px;height:28px;}
 
 .nav-mobile{
-  display:none;flex-direction:column;gap:4px;padding:14px 24px 20px;
-  background:var(--bg);border-top:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    top:70px;
+    right:-100%;
+    width:280px;
+    height:calc(100vh - 70px);
+    background:#fff;
+    padding:20px;
+    gap:8px;
+    transition:right .35s ease;
+    box-shadow:-8px 0 25px rgba(0,0,0,.15);
+    z-index:999;
 }
-.nav-mobile a{padding:10px 4px;font-size:15px;font-weight:500;color:var(--fg);}
-.nav-mobile.open{display:flex;}
+
+.nav-mobile.open{
+    right:0;
+}
+
+.nav-mobile a{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    color:#000;
+    font-size:16px;
+}
 
 /* HERO */
   .hero{
@@ -352,11 +378,6 @@ p{
   .success-box h3{color:var(--blue); margin-bottom:8px;}
   .success-box p{color:var(--muted); font-size:.92rem;}
 
-  @media (max-width:640px){
-    .form-wrap{padding:26px;}
-    .form-grid{grid-template-columns:1fr;}
-  }
-
   /* WHY WORK */
   .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;}
   .why-card{text-align:center; padding:10px;}
@@ -368,8 +389,6 @@ p{
   .why-card h4{font-size:1rem; margin-bottom:8px; color:var(--blue);}
   .why-card p{font-size:.88rem; color:var(--muted);}
 
-/* FOOTER */
-
 /* ================= FOOTER ================= */
 footer{background:#110637;padding:64px 0 30px;}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
@@ -380,62 +399,108 @@ footer{background:#110637;padding:64px 0 30px;}
   .foot-grid li a:hover{color:#fff;}
   .foot-about p{font-size:13.6px;color:var(--on-dark-mid);max-width:300px;margin:0;}
   .foot-bottom{border-top:1px solid var(--line-dark);padding-top:22px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11.5px;color:var(--on-dark-faint);flex-wrap:wrap;gap:10px;}
-/* ================= RESPONSIVE ================= */
 
-/* TABLET */
-@media (max-width: 1024px) {
-    .footer {
-        padding: 50px 30px;
-    }
+/* ==================================================================
+   RESPONSIVE BREAKPOINTS
+   Small mobile:   up to 480px
+   Mobile:          481px – 767px
+   Tablet:           768px – 991px
+   Small laptop:    992px – 1365px
+   Laptop:          1366px – 1599px
+   Large desktop:   1600px and up
+   ================================================================== */
 
-    .footer-container {
-        gap: 25px;
-    }
+/* ---------- 1600px and up: large desktop ---------- */
+@media (min-width:1600px){
+    .wrap{ max-width:1320px; }
+    .header-inner{ max-width:1500px; }
+    .hero h1{ font-size:4.2rem; }
+    .job-grid{ gap:26px; }
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
-
-    .footer-col {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .footer-col h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .social-icons {
-        justify-content: center;
-    }
+/* ---------- up to 1599px: laptop ---------- */
+@media (max-width:1599px){
+    .header-inner{ max-width:1280px; }
+    .nav-desktop{ gap:22px; }
+    .nav-desktop a{ font-size:18px; }
 }
 
-/* SMALL MOBILE */
-@media (max-width: 480px) {
-    .footer {
-        padding: 40px 20px;
-    }
-
-    .footer-col h3 {
-        font-size: 18px;
-    }
-
-    .footer-col a,
-    .footer-col p {
-        font-size: 13px;
-    }
+/* ---------- up to 1365px: small laptop ---------- */
+@media (max-width:1365px){
+    .header-inner{ padding:0 18px; }
+    .nav-desktop{ gap:16px; }
+    .nav-desktop a{ font-size:16px; }
+    .btn{ padding:11px 18px; font-size:13px; }
+    .hero{ padding:100px 28px 76px; }
+    .foot-grid{ grid-template-columns:repeat(2,1fr); }
 }
 
+/* ---------- up to 991px: tablet ---------- */
+@media (max-width:991px){
+    .nav-desktop, .header-cta{ display:none; }
+    .menu-toggle{ display:flex; align-items:center; justify-content:center; }
 
+    .hero{ padding:96px 24px 64px; }
+    .hero h1{ font-size:clamp(2rem,5vw,2.8rem); }
+    .hero .stat-line{ gap:32px; }
 
+    section{ padding:64px 24px; }
 
+    .job-grid{ grid-template-columns:repeat(2,1fr); }
+    .intern-list{ grid-template-columns:repeat(2,1fr); }
+    .why-grid{ grid-template-columns:repeat(2,1fr); }
+
+    .form-wrap{ padding:32px; }
+    .form-grid{ grid-template-columns:1fr 1fr; }
+
+    .foot-grid{ grid-template-columns:1fr 1fr; row-gap:32px; }
+}
+
+/* ---------- 992px and up: hide mobile nav panel ---------- */
+@media (min-width:992px){
+    .nav-mobile{ display:none !important; }
+}
+
+/* ---------- up to 767px: mobile ---------- */
+@media (max-width:767px){
+    .hero{ padding:88px 20px 56px; }
+    .hero h1{ font-size:clamp(1.8rem,7vw,2.3rem); }
+    .hero p{ font-size:.95rem; }
+    .hero .stat-line{ gap:24px; margin-top:28px; }
+    .hero .stat-line .num{ font-size:1.6rem; }
+
+    section{ padding:52px 20px; }
+    .section-head{ margin-bottom:34px; }
+
+    .job-grid{ grid-template-columns:1fr; }
+    .intern-list{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+
+    .form-wrap{ padding:26px; }
+    .form-grid{ grid-template-columns:1fr; }
+
+    .cta-band h2{ font-size:1.6rem; }
+
+    .foot-grid{ grid-template-columns:1fr; gap:30px; }
+    .foot-bottom{ flex-direction:column; text-align:center; }
+}
+
+/* ---------- up to 480px: small mobile ---------- */
+@media (max-width:480px){
+    .hero h1{ font-size:1.7rem; }
+    .hero p{ font-size:.9rem; }
+    .hero .stat-line{ flex-direction:column; gap:14px; }
+
+    section{ padding:44px 16px; }
+
+    .job-card{ padding:20px; }
+    .form-wrap{ padding:20px; }
+
+    .cta-band h2{ font-size:1.4rem; }
+    .btn-apply{ padding:14px 30px; width:100%; }
+
+    .foot-logo-badge img{ height:38px; }
+}
 
 </style>
 
@@ -462,11 +527,21 @@ footer{background:#110637;padding:64px 0 30px;}
       <a href="index.html#contact" class="btn btn-primary btn-shimmer">Request Consultation </a>
     </div>
     <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      <svg id="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
     </button>
     
   </div>
-
+  <nav id="nav-mobile" class="nav-mobile">
+    <a href="index.html#solutions">Solutions</a>
+    <a href="index.html#process">Process</a>
+    <a href="projects.html">Projects</a>
+    <a href="index.html#industries">Industries</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="careers.html" style="color:var(--primary);">Careers</a>
+    <a href="index.html#contact" class="btn btn-primary btn-shimmer" style="text-align:center;margin-top:8px;">Request Consultation</a>
+  </nav>
 </header>
 
 
@@ -757,6 +832,41 @@ footer{background:#110637;padding:64px 0 30px;}
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+
+    // ==========================
+    // Mobile menu toggle
+    // ==========================
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMobile = document.getElementById("nav-mobile");
+    const menuIcon = document.getElementById("menu-icon");
+
+    menuToggle?.addEventListener("click", () => {
+
+        navMobile.classList.toggle("open");
+
+        if (navMobile.classList.contains("open")) {
+            menuIcon.innerHTML = `
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 6L6 18M6 6l12 12"/>`;
+        } else {
+            menuIcon.innerHTML = `
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 6h18M3 12h18M3 18h18"/>`;
+        }
+
+    });
+
+    navMobile?.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navMobile.classList.remove("open");
+            menuIcon.innerHTML = `
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 6h18M3 12h18M3 18h18"/>`;
+        });
+    });
 
     // ==========================
     // Job Card Toggle
